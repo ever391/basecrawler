@@ -1,2 +1,17 @@
-# base-crawler
-基础爬虫款框架/Base Cralwer Frame 
+# 说明
+## 简介
+BaseCrawler是一个轻量级，简单快捷上手操作爬虫框架，对于爬虫开发者，有很多实用的功能已经进行了优化与完善。
+(目前正在写文档说明，请期待)
+## 反爬
+pass
+## 代理
+pass
+## 动态网页
+pass
+## 翻页
+pass
+## 代理
+pass
+
+
+
