@@ -56,4 +56,4 @@ svn switch --relocate svn://123.56.203.190/robot  svn://192.168.1.13/repos
 注意事项
 ----------
 
-    **需要自行下载imghdr**
+    **需要自行下载 ``imghdr`` 库**
