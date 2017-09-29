@@ -48,6 +48,7 @@ PIP 安装
         url = http://www.baidu.com
         crawler.static_downloader_get(url)
 
+svn switch --relocate svn://123.56.203.190/robot  svn://192.168.1.13/repos
 
 
 
@@ -55,6 +56,4 @@ PIP 安装
 注意事项
 ----------
 
-.. py:function:: basecrawler.basecrawler.get_img_name
-
-    需要自行下载imghdr
+    **需要自行下载imghdr**
