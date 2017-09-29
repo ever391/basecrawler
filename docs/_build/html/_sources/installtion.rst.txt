@@ -48,7 +48,6 @@ PIP 安装
         url = http://www.baidu.com
         crawler.static_downloader_get(url)
 
-svn switch --relocate svn://123.56.203.190/robot  svn://192.168.1.13/repos
 
 
 
