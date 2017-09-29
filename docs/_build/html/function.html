@@ -1,0 +1,608 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BaseCrawler类方法说明 &mdash; basecrawler 0.0.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="basecrawler 0.0.2 documentation" href="index.html"/>
+        <link rel="prev" title="安装说明" href="installtion.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> basecrawler
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installtion.html">安装说明</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BaseCrawler类方法说明</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">basecrawler</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>BaseCrawler类方法说明</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/function.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basecrawler">
+<h1>BaseCrawler类方法说明<a class="headerlink" href="#basecrawler" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="basecrawler.basecrawler.BaseCrawler">
+<em class="property">class </em><code class="descclassname">basecrawler.basecrawler.</code><code class="descname">BaseCrawler</code><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler" title="Permalink to this definition">¶</a></dt>
+<dd><p>基础爬虫类,实现多种解析方法及实用功能</p>
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.css_parser_urls">
+<code class="descname">css_parser_urls</code><span class="sig-paren">(</span><em>soup</em>, <em>css_rule</em>, <em>limit=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.css_parser_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>基于CSS选择器解析</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>soup</strong> -- Obj BeautifulSoup对象</li>
+<li><strong>css_rule</strong> -- String css提取规则</li>
+<li><strong>limit</strong> -- Int 限制</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">List [url1,url2,url3]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.datetime_format">
+<code class="descname">datetime_format</code><span class="sig-paren">(</span><em>datetime</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.datetime_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>时间格式化, 非标准时间：&quot;1天前，2天前……大于2天未进行格式化&quot;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>datetime</strong> -- String 任何格式的时间</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String example: 2017-10-6</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.download_img">
+<code class="descname">download_img</code><span class="sig-paren">(</span><em>urls</em>, <em>base_url</em>, <em>content</em>, <em>bucket</em>, <em>pics</em>, <em>img_base_name=''</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.download_img" title="Permalink to this definition">¶</a></dt>
+<dd><p>图片下载
+:param urls: List 提取图片链接地址</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_url</strong> -- String 文章URL</li>
+<li><strong>content</strong> -- String HTML</li>
+<li><strong>bucket</strong> -- Obj 阿里云oss服务使用</li>
+<li><strong>pics</strong> -- List 空列表</li>
+<li><strong>img_base_name</strong> -- String 图片名前缀</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><p>String 替换图片地址后的HTML</p>
+<p>List 符合格式大小的图片列表地址</p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.exec_lazy_loads">
+<code class="descname">exec_lazy_loads</code><span class="sig-paren">(</span><em>browser</em>, <em>start=1000</em>, <em>stop=10000</em>, <em>step=1000</em>, <em>interval=0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.exec_lazy_loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Phantomjs浏览器惰性加载</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>browser</strong> -- Obj Phantomjs浏览器对象</li>
+<li><strong>start</strong> -- Int 开始页</li>
+<li><strong>stop</strong> -- Int 停止页</li>
+<li><strong>step</strong> -- Int 偏移页</li>
+<li><strong>interval</strong> -- Float 频率</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Obj 完成惰性加载后的Phantomjs浏览器对象</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.format_proxy_by_requests">
+<code class="descname">format_proxy_by_requests</code><span class="sig-paren">(</span><em>ip</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.format_proxy_by_requests" title="Permalink to this definition">¶</a></dt>
+<dd><p>格式化为requests代理格式</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ip</strong> -- String &quot;127.0.0.1:1234&quot;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dict {&quot;http&quot;:&quot;<a class="reference external" href="http://127.0.0.1:1234">http://127.0.0.1:1234</a>&quot;,&quot;https&quot;:&quot;<a class="reference external" href="https://127.0.0.1:1234">https://127.0.0.1:1234</a>&quot;}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.get_content">
+<code class="descname">get_content</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>解析内容页结果</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>args</strong> -- </li>
+<li><strong>kwargs</strong> -- </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Json {&quot;title&quot;:String,&quot;content&quot;:String,……}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.get_content_urls">
+<code class="descname">get_content_urls</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_content_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>获取内容页url列表</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>args</strong> -- </li>
+<li><strong>kwargs</strong> -- </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">List [url1,url2,url3]</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.get_full_url">
+<code class="descname">get_full_url</code><span class="sig-paren">(</span><em>base_url</em>, <em>half_url</em>, <em>is_img=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_full_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>获取完整url地址</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_url</strong> -- String 源地址</li>
+<li><strong>half_url</strong> -- String 提取后的非完整url地址</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String 完整的url地址</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.get_img_name">
+<code class="descname">get_img_name</code><span class="sig-paren">(</span><em>img_content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_img_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>获取图片名称</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img_content</strong> -- img_content: Stream2bin 2进制流文件</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String 图片名字</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.get_img_replace_pattern_rule">
+<code class="descname">get_img_replace_pattern_rule</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_img_replace_pattern_rule" title="Permalink to this definition">¶</a></dt>
+<dd><p>图片地址预处理</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>url</strong> -- String url</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String 正则匹配规则</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.get_phantomjs_browser">
+<code class="descname">get_phantomjs_browser</code><span class="sig-paren">(</span><em>proxy=None</em>, <em>timeout=15</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_phantomjs_browser" title="Permalink to this definition">¶</a></dt>
+<dd><p>创建一个phantomjs浏览器</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>proxy</strong> -- String &quot;ip:port&quot;</li>
+<li><strong>timeout</strong> -- Int</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Phantomjs.Browser 浏览器对象</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.get_picture">
+<code class="descname">get_picture</code><span class="sig-paren">(</span><em>base_url</em>, <em>content</em>, <em>bucket=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_picture" title="Permalink to this definition">¶</a></dt>
+<dd><p>下载图片</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base_url</strong> -- String 文章URL</li>
+<li><strong>content</strong> -- String HTML</li>
+<li><strong>bucket</strong> -- Obj 阿里云 服务使用</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String HTML</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>pics List [主图片列表]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.is_img_uniform_size">
+<code class="descname">is_img_uniform_size</code><span class="sig-paren">(</span><em>img_content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.is_img_uniform_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>判断图片格式大小是否符合要求</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img_content</strong> -- Stream2bin 2进制流文件</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Boole True/False</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.re_exclude">
+<code class="descname">re_exclude</code><span class="sig-paren">(</span><em>rule</em>, <em>content</em>, <em>separator=':::'</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.re_exclude" title="Permalink to this definition">¶</a></dt>
+<dd><p>正则不包含</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rule</strong> -- String 正则规则</li>
+<li><strong>content</strong> -- String 被匹配的内容</li>
+<li><strong>separator</strong> -- String 分隔符</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String 被过滤后的内容</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.re_parser">
+<code class="descname">re_parser</code><span class="sig-paren">(</span><em>rule</em>, <em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.re_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>正则匹配内容</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rule</strong> -- String 正则规则</li>
+<li><strong>content</strong> -- String 被匹配的内容</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String 匹配后的结果</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>主程序入口</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>args</strong> -- </li>
+<li><strong>kwargs</strong> -- </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.static_downloader_get">
+<code class="descname">static_downloader_get</code><span class="sig-paren">(</span><em>url</em>, <em>charset='utf8'</em>, <em>timeout=15</em>, <em>proxy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.static_downloader_get" title="Permalink to this definition">¶</a></dt>
+<dd><p>静态爬取</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> -- String 目标url</li>
+<li><strong>charset</strong> -- String 解码格式</li>
+<li><strong>timeout</strong> -- int 超时时间</li>
+<li><strong>proxy</strong> -- Json {&quot;http&quot;:&quot;<a class="reference external" href="http://ip:port">http://ip:port</a>&quot;,&quot;https&quot;:&quot;<a class="reference external" href="http://ip:port">http://ip:port</a>&quot;}</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">requests.Response对象</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.static_many_page">
+<code class="descname">static_many_page</code><span class="sig-paren">(</span><em>url</em>, <em>start_page</em>, <em>stop_page</em>, <em>step=1</em>, <em>chaset='utf8'</em>, <em>timeout=15</em>, <em>proxy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.static_many_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>爬取多页
+:param url: String 格式化后的ulr &quot;<a class="reference external" href="http://www.news.com">http://www.news.com</a>?page={num}&quot;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start_page</strong> -- Int 开始页面</li>
+<li><strong>stop_page</strong> -- Int 结束页面</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">requests.Response对象</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="installtion.html" class="btn btn-neutral" title="安装说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Salem.Jin.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
