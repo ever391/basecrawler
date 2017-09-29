@@ -13,6 +13,7 @@ import random
 import logging
 import requests
 import urlparse
+import imghdr
 import urllib
 import hashlib
 import json
@@ -58,7 +59,7 @@ class BaseCrawler(object):
 
     def run(self, *args, **kwargs):
         """
-        主程序入口
+        抽像方法：主程序入口
 
         :param args:
 
@@ -71,7 +72,7 @@ class BaseCrawler(object):
 
     def get_content_urls(self, *args, **kwargs):
         """
-        获取内容页url列表
+        抽像方法：获取内容页url列表
 
         :param args:
 
@@ -83,7 +84,7 @@ class BaseCrawler(object):
 
     def get_content(self, *args, **kwargs):
         """
-        解析内容页结果
+        抽像方法：解析内容页结果
 
         :param args:
 
@@ -510,21 +511,15 @@ class BaseCrawler(object):
             img_flag = False
         return img_flag
 
-    def get_img_name(self,img_content):
+    def get_image_format(self, img_content):
         """
-        获取图片名称
+        获取图片格式
 
         :param img_content: img_content: Stream2bin 2进制流文件
 
-        :return: String 图片名字
+        :return: String 图片格式
         """
-        import imghdr
-        img_type = imghdr.what('test', img_content)
-        if img_type == 'jpeg':
-            name = ''.join(hashlib.sha1(img_content).hexdigest() + '.jpg')
-        else:
-            name = ''.join(hashlib.sha1(img_content).hexdigest() + '.' + img_type)
-        return name
+        return imghdr.what('test', img_content)
 
     def get_img_replace_pattern_rule(self, url):
         """

@@ -48,11 +48,3 @@ PIP 安装
         url = http://www.baidu.com
         crawler.static_downloader_get(url)
 
-
-
-
-
-注意事项
-----------
-
-    **需要自行下载 ``imghdr`` 库**

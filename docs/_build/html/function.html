@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>BaseCrawler类方法说明 &mdash; basecrawler 0.0.2 documentation</title>
+  <title>BaseCrawler类 &mdash; basecrawler 0.0.2 documentation</title>
   
 
   
@@ -89,10 +89,13 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">basecrawler</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installtion.html">安装说明</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">BaseCrawler类方法说明</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BaseCrawler类</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basecrawler-api">BaseCrawler API</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -137,7 +140,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>BaseCrawler类方法说明</li>
+      <li>BaseCrawler类</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -157,7 +160,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="basecrawler">
-<h1>BaseCrawler类方法说明<a class="headerlink" href="#basecrawler" title="Permalink to this headline">¶</a></h1>
+<h1>BaseCrawler类<a class="headerlink" href="#basecrawler" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basecrawler-api">
+<h2>BaseCrawler API<a class="headerlink" href="#basecrawler-api" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="basecrawler.basecrawler.BaseCrawler">
 <em class="property">class </em><code class="descclassname">basecrawler.basecrawler.</code><code class="descname">BaseCrawler</code><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler" title="Permalink to this definition">¶</a></dt>
@@ -270,7 +275,7 @@
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_content">
 <code class="descname">get_content</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_content" title="Permalink to this definition">¶</a></dt>
-<dd><p>解析内容页结果</p>
+<dd><p>抽像方法：解析内容页结果</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -291,7 +296,7 @@
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_content_urls">
 <code class="descname">get_content_urls</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_content_urls" title="Permalink to this definition">¶</a></dt>
-<dd><p>获取内容页url列表</p>
+<dd><p>抽像方法：获取内容页url列表</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -331,16 +336,16 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="basecrawler.basecrawler.BaseCrawler.get_img_name">
-<code class="descname">get_img_name</code><span class="sig-paren">(</span><em>img_content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_img_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>获取图片名称</p>
+<dt id="basecrawler.basecrawler.BaseCrawler.get_image_format">
+<code class="descname">get_image_format</code><span class="sig-paren">(</span><em>img_content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_image_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>获取图片格式</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img_content</strong> -- img_content: Stream2bin 2进制流文件</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String 图片名字</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String 图片格式</td>
 </tr>
 </tbody>
 </table>
@@ -468,7 +473,7 @@
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.run">
 <code class="descname">run</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>主程序入口</p>
+<dd><p>抽像方法：主程序入口</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -533,6 +538,7 @@
 
 </dd></dl>
 
+</div>
 </div>
 
 

@@ -57,10 +57,6 @@ API说明文档请访问：http://www.basecrawler.com(目前暂时未上线)
         crawler.static_downloader_get(url)
 
 
-
-
-
-
 反爬
 ------
 
@@ -86,9 +82,5 @@ API说明文档请访问：http://www.basecrawler.com(目前暂时未上线)
 
     目前未加入此功能，后期会完成免费ip池处理
 
-注意事项
-----------
-
-    **需要自行下载 ``imghdr`` 库**
 
 
