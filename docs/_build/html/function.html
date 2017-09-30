@@ -412,6 +412,20 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.get_proxy_ips">
+<code class="descname">get_proxy_ips</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_proxy_ips" title="Permalink to this definition">¶</a></dt>
+<dd><p>获取99个ip代理, 不要频烦请求</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List ip代理列表</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.is_img_uniform_size">
 <code class="descname">is_img_uniform_size</code><span class="sig-paren">(</span><em>img_content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.is_img_uniform_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>判断图片格式大小是否符合要求</p>
@@ -422,6 +436,27 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img_content</strong> -- Stream2bin 2进制流文件</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Boole True/False</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.login_account">
+<code class="descname">login_account</code><span class="sig-paren">(</span><em>url</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.login_account" title="Permalink to this definition">¶</a></dt>
+<dd><p>网站登录操作</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> -- String 登录请求的url地址</li>
+<li><strong>data</strong> -- Dict 登录请求提交的相关数据</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -518,7 +553,7 @@
 <dt id="basecrawler.basecrawler.BaseCrawler.static_many_page">
 <code class="descname">static_many_page</code><span class="sig-paren">(</span><em>url</em>, <em>start_page</em>, <em>stop_page</em>, <em>step=1</em>, <em>chaset='utf8'</em>, <em>timeout=15</em>, <em>proxy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.static_many_page" title="Permalink to this definition">¶</a></dt>
 <dd><p>爬取多页
-:param url: String 格式化后的ulr &quot;<a class="reference external" href="http://www.news.com">http://www.news.com</a>?page={num}&quot;</p>
+:param url: String 格式化后的ulr &quot;<a class="reference external" href="http://www.news.com">http://www.news.com</a>?page={page}&quot;</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -531,6 +566,22 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">requests.Response对象</p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.update_headers">
+<code class="descname">update_headers</code><span class="sig-paren">(</span><em>header</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.update_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>修改请求头信息</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>header</strong> -- Dict 请求头信息</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>

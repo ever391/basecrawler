@@ -15,6 +15,7 @@ requires = [
     'bs4',
     'selenium',
     'Pillow',
+    'lxml',
 ]
 
 setup(

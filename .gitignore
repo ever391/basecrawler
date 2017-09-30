@@ -1,5 +1,6 @@
 *.pyc
 *.so
+*.log
 *.egg
 *.egg-info
 .idea/

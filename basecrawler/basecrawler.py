@@ -15,14 +15,16 @@ import requests
 import urlparse
 import imghdr
 import urllib
-import hashlib
-import json
+import lxml
+
+
 try:
     from Pillow import Image
 except:
     from PIL import Image
 from selenium import webdriver
 from bs4 import BeautifulSoup
+from lxml import etree
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 
@@ -55,7 +57,6 @@ class BaseCrawler(object):
         fh = logging.FileHandler('crawler.log')
         fh.setFormatter(fmt)
         self.logger.addHandler(fh)
-        # self.redis_client = redis.Redis()
 
     def run(self, *args, **kwargs):
         """
@@ -198,6 +199,9 @@ class BaseCrawler(object):
 
         :return: Obj 完成惰性加载后的Phantomjs浏览器对象
         """
+        if not isinstance(browser, webdriver.PhantomJS):
+            raise ValueError('args browser must a webdriver PhantomJS object!')
+
         for i in range(start, stop, step):
             browser.execute_script('document.body.scrollTop={}'.format(i))
             time.sleep(interval)
@@ -337,7 +341,9 @@ class BaseCrawler(object):
         正则匹配内容
 
         :param rule: String 正则规则
+
         :param content: String 被匹配的内容
+
         :return: String 匹配后的结果
         """
         if rule:
@@ -355,7 +361,7 @@ class BaseCrawler(object):
     def static_many_page(self, url, start_page, stop_page, step=1, chaset='utf8', timeout=15, proxy=None):
         """
         爬取多页
-        :param url: String 格式化后的ulr "http://www.news.com?page={num}"
+        :param url: String 格式化后的ulr "http://www.news.com?page={page}"
 
         :param start_page: Int 开始页面
 
@@ -363,9 +369,9 @@ class BaseCrawler(object):
 
         :return: requests.Response对象
         """
-        for page in range(start_page, stop_page+1, step):
+        for num in range(start_page, stop_page+1, step):
             print url
-            tmp_url = url.format(num=page)
+            tmp_url = url.format(page=num)
             yield self.static_downloader_get(tmp_url, charset=chaset, timeout=timeout, proxy=proxy)
 
     def get_picture(self, base_url, content, bucket=None):
@@ -537,3 +543,48 @@ class BaseCrawler(object):
             url = re.sub('\?', '\?', url)
         pat = u'<img .*?"{}".*?>'.format(url)
         return pat
+
+    def get_proxy_ips(self):
+        """
+        获取99个ip代理, 不要频烦请求
+
+        :return: List ip代理列表
+        """
+        url = 'http://www.xicidaili.com/nn/1'
+        response = self.static_downloader_get(url)
+        select = etree.HTML(response.text)
+        ips = set()
+        for tr_node in select.xpath('//*[@id="ip_list"]/tr[position()>1]'):
+            ip = tr_node.xpath('td[2]/text()')[0]
+            port = tr_node.xpath('td[3]/text()')[0]
+            ip_and_port = ip + ':' + port
+            ips.add(ip_and_port)
+        return ips
+
+    def login_account(self, url, data):
+        """
+        网站登录操作
+
+        :param url: String 登录请求的url地址
+
+        :param data: Dict 登录请求提交的相关数据
+
+        :return:  None
+        """
+        self.request.post(url, data)
+
+    def update_headers(self, header):
+        """
+        修改请求头信息
+
+        :param header: Dict 请求头信息
+
+        :return:
+        """
+        self.request.headers.update(header)
+        return None
+
+if __name__ == "__main__":
+    bc = BaseCrawler()
+    print len(bc.get_proxy_ips())
+
