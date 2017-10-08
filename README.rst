@@ -5,7 +5,8 @@
 -------
 
 BaseCrawler是一个轻量级，简单快捷上手操作基础爬虫框架，对于爬虫开发者，有很多实用的功能已经进行了优化与完善。
-API说明文档请访问：http://www.basecrawler.com(目前暂时未上线)
+API说明文档请访问：http://www.basecrawler.com(已经上线)
+具体使用请查看文档
 
 
 安装说明
