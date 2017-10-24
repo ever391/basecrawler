@@ -1,7 +1,8 @@
 # coding:utf8
 """
 BaseCrawler is The Crawler Framework, Author is Salem.Jin, my nickname is 39
-Github:https://github.com/ever391/base-crawler
+Github: https://github.com/ever391/base-crawler
+Docs: http://www.basecrawler.com
 I first write BaseCrawler of The Crawler Framework, I hope everybody like it.
 The BaseCrawler is very flexible, you can use function  do you wanna things in the class
 """
@@ -15,6 +16,7 @@ import requests
 import urlparse
 import imghdr
 import urllib
+import hashlib
 import lxml
 
 
@@ -95,7 +97,7 @@ class BaseCrawler(object):
         """
         raise ImportError('you must override this function')
 
-    def static_downloader_get(self, url, charset='utf8', timeout=15, proxy=None):
+    def requests_get(self, url, charset='utf8', timeout=15, proxy=None):
         """
         静态爬取
 
@@ -110,6 +112,26 @@ class BaseCrawler(object):
         :return: requests.Response对象
         """
         response = self.request.get(url, proxies=proxy, timeout=timeout)
+        response.encoding = charset
+        return response
+
+    def requests_post(self, url, data, charset='utf8', timeout=15, proxy=None):
+        """
+        静态爬取
+
+        :param url: String 目标url
+
+        :param data: Dict 传递的参数
+
+        :param charset: String 解码格式
+
+        :param timeout: int 超时时间
+
+        :param proxy: Json {"http":"http://ip:port","https":"http://ip:port"}
+
+        :return: requests.Response对象
+        """
+        response = self.request.post(url, data, proxies=proxy, timeout=timeout)
         response.encoding = charset
         return response
 
@@ -207,7 +229,7 @@ class BaseCrawler(object):
             time.sleep(interval)
         return browser
 
-    def get_full_url(self, base_url, half_url, is_img=False):
+    def get_full_url(self, base_url, half_url, is_image=False):
         """
         获取完整url地址
 
@@ -222,7 +244,7 @@ class BaseCrawler(object):
         protocol, result = urllib.splittype(base_url)
         base_url, rest = urllib.splithost(result)
         base_url = protocol + '://' + base_url
-        if is_img:
+        if is_image:
             SPECIAL_URLS = IMG_SPECIAL_URLS
         url_flag = False
         for special_url in SPECIAL_URLS:
@@ -358,7 +380,7 @@ class BaseCrawler(object):
         else:
             return content
 
-    def static_many_page(self, url, start_page, stop_page, step=1, chaset='utf8', timeout=15, proxy=None):
+    def mul_page_by_get(self, url, start_page, stop_page, step=1, chaset='utf8', timeout=15, proxy=None):
         """
         爬取多页
         :param url: String 格式化后的ulr "http://www.news.com?page={page}"
@@ -370,9 +392,8 @@ class BaseCrawler(object):
         :return: requests.Response对象
         """
         for num in range(start_page, stop_page+1, step):
-            print url
             tmp_url = url.format(page=num)
-            yield self.static_downloader_get(tmp_url, charset=chaset, timeout=timeout, proxy=proxy)
+            yield self.requests_get(tmp_url, charset=chaset, timeout=timeout, proxy=proxy)
 
     def get_picture(self, base_url, content, bucket=None):
         """
@@ -400,10 +421,8 @@ class BaseCrawler(object):
         # data-src 处理
         SP_URLS_DATA_SRC = ['mp.weixin.qq.com', 'qdaily.com']
 
-        try:
-            content = re.sub('<IMG', '<img', content)
-        except Exception as e:
-            logging.error(str(e))
+
+        content = re.sub('<IMG', '<img', content)
         try:
             pics = []
             img_data_original = [sp_url for sp_url in SP_URLS_DATA_ORIGINAL if sp_url in base_url]
@@ -413,38 +432,38 @@ class BaseCrawler(object):
             img_data_src = [sp_url for sp_url in SP_URLS_DATA_SRC if sp_url in base_url]
             if bool(img_data_original):
                 urls = re.findall('<img.*?data-original="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, bucket, pics)
+                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
             elif bool(img_original):
                 urls = re.findall('<img.*?original="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, bucket, pics)
+                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
             elif bool(img_file):
                 urls = re.findall('<img.*? file="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, bucket, pics)
+                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
             elif bool(img_src_and_data_src):
                 urls = re.findall('<img.*? src="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, bucket, pics)
+                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
                 urls = re.findall('<img.*? data-src="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, bucket, pics)
+                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
             elif bool(img_data_src):
                 urls = re.findall('<img.*? data-src="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, bucket, pics)
+                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
             else:
                 urls = re.findall('<img.*? src="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, bucket, pics)
+                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
 
             return content, pics
         except Exception as e:
             logging.error(base_url + ':::' + str(e), exc_info=True)
             return content, pics
 
-    def download_img(self, urls, base_url, content, bucket, pics, img_base_name=''):
+    def download_img(self, img_urls, base_url, html, pics, bucket=None, img_base_name=''):
         """
         图片下载
-        :param urls: List 提取图片链接地址
+        :param img_urls: List 提取图片链接地址
 
         :param base_url: String 文章URL
 
-        :param content: String HTML
+        :param html: String HTML
 
         :param bucket: Obj 阿里云oss服务使用
 
@@ -455,7 +474,7 @@ class BaseCrawler(object):
 
             List 符合格式大小的图片列表地址
         """
-        for url in urls:
+        for url in img_urls:
             url = url.strip()
 
             if len(url) == 0:
@@ -463,42 +482,62 @@ class BaseCrawler(object):
 
             img_url = url
             if 'http' not in img_url:
-                img_url = self.get_full_url(base_url, url, is_img=True)
-            try:
-                if 'bzw315.com' in img_url:
-                    img_url = img_url.split('?')[0]
-                try:
-                    pict_content = requests.get(img_url, timeout=20).content
-                except:
-                    continue
+                img_url = self.get_full_url(base_url, url, is_image=True)
 
-                img_flag = self.is_img_uniform_size(pict_content)
-            except Exception as e:
-                print '%s' % e.message
+            if 'bzw315.com' in img_url:
+                img_url = img_url.split('?')[0]
+            try:
+                pict_content = requests.get(img_url, timeout=20).content
+            except:
                 continue
+
+            img_flag = self.is_img_uniform_size(pict_content)
+
             try:
                 name = self.get_img_name(pict_content)
             except Exception as e:
                 continue
+
+            img_addr = ''.join(img_base_name + name)
             if bucket:
                 try:
-                    bucket.put_object(name, pict_content)
+                    bucket.put_object(img_addr, pict_content)
                 except Exception as e:
-                    print '3' * 100
-                    logging.error(url + e.message)
-                    logging.info(url)
+                    logging.error(str(e))
                     continue
 
-
-            oss2_pict = ''.join(img_base_name + name)
-            pat = self.get_img_replace_pattern_rule(url)
-            content = re.sub(pat, '<img src="{}"/>'.format(oss2_pict), content)
-
+            html = self.replace_img_addr_in_html(url, img_addr, html)
             if img_flag:
-                pics.append(oss2_pict)
-        return content, pics
+                pics.append(img_addr)
+        return html, pics
 
-    def is_img_uniform_size(self, img_content):
+    def get_img_name(self, img_content):
+        """
+        得到图片唯一名称
+        :param img_content: Byte 图片流格式
+        :return:
+        """
+        img_type = self.get_image_format(img_content)
+        if img_type == 'jpeg':
+            name = ''.join(hashlib.sha1(img_content).hexdigest() + '.jpg')
+        else:
+            name = ''.join(hashlib.sha1(img_content).hexdigest() + '.' + img_type)
+        return name
+
+    def replace_img_addr_in_html(self, url, img_addr, html):
+        """
+        替换html中图片地址
+        :param url: String 被替换的url
+        :param img_addr: String 新的图片地址
+        :param html: String 被替换的html
+        :return: html String
+        """
+
+        pat = self.get_img_replace_pattern_rule(url)
+        html = re.sub(pat, '<img src="{}"/>'.format(img_addr), html)
+        return html
+
+    def is_img_uniform_size(self, img_content, heigth=150, width=150):
         """
         判断图片格式大小是否符合要求
 
@@ -511,9 +550,9 @@ class BaseCrawler(object):
         except:
             print 'Image.open io.BytesIO failed'
             return
-        height, width = img.size
+        img_h, img_w = img.size
         img_flag = True
-        if height < 150 or width < 150:
+        if img_h < heigth or img_w < width:
             img_flag = False
         return img_flag
 
@@ -551,7 +590,7 @@ class BaseCrawler(object):
         :return: List ip代理列表
         """
         url = 'http://www.xicidaili.com/nn/1'
-        response = self.static_downloader_get(url)
+        response = self.requests_get(url)
         select = etree.HTML(response.text)
         ips = set()
         for tr_node in select.xpath('//*[@id="ip_list"]/tr[position()>1]'):
