@@ -5,7 +5,7 @@
 -------
 
 BaseCrawler是一个轻量级，简单快捷上手操作基础爬虫框架，对于爬虫开发者，有很多实用的功能已经进行了优化与完善。
-API说明文档请访问：http://www.basecrawler.com(已经上线)
+API说明文档请访问：http://www.basecrawler.com(已经上线), 文档更新较慢（文档更新后会进行通知)
 具体使用请查看文档
 
 
@@ -33,7 +33,7 @@ API说明文档请访问：http://www.basecrawler.com(已经上线)
 
     通过basecrawler请求目标url ::
 
-        response = basecrawler.static_downloader_get(url)
+        response = basecrawler.requests_get(url)
 
     ``response`` 是requests.Response对象，输出返回的结果内容 ::
 
@@ -55,7 +55,7 @@ API说明文档请访问：http://www.basecrawler.com(已经上线)
     if __name__ == "__main__":
         crawler = Crawler()
         url = http://www.baidu.com
-        crawler.static_downloader_get(url)
+        crawler.requests_get(url)
 
 
 支持反反爬
@@ -83,6 +83,11 @@ API说明文档请访问：http://www.basecrawler.com(已经上线)
 
     * basecrawler内含获取代理IP方法，单次调用提供99个免费IP, 因验证ip会加大代理负载，IP不做验证处理，即时即用
 
+支持解析微信公众号文章列表
+-----------------------
+
+支持解析微信公众号文章内容
+-----------------------
 
 
 
