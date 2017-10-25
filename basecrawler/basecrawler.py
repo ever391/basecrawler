@@ -10,6 +10,7 @@ The BaseCrawler is very flexible, you can use function  do you wanna things in t
 import io
 import re
 import time
+import json
 import random
 import logging
 import requests
@@ -18,6 +19,7 @@ import imghdr
 import urllib
 import hashlib
 import lxml
+import htmlentitydefs
 
 
 try:
@@ -622,6 +624,145 @@ class BaseCrawler(object):
         """
         self.request.headers.update(header)
         return None
+
+    def get_wechat_content_urls(self, content):
+        """
+        得到公众号内容url列表
+
+        :param content: String
+
+        :return: List
+        """
+        result = re.search("var msgList = '(.*?)'", content, flags=re.S)
+        content_urls = []
+        if result:
+            content = result.group(1)
+            replace =[u"&#39;", u"'", u"&quot;", u'"', u"&nbsp;", u" ", u"&gt;", u">", u"&lt;", u"<", u"&amp;", u"&", u"&yen;", u"¥", u"\\\\", u""]
+            for i in range(len(replace)):
+                if i % 2 == 0:
+                    content = re.sub(replace[i],replace[i+1] , content)
+            data = json.loads(content)
+            for item in data['list']:
+                try:
+                    for i in item['app_msg_ext_info']['multi_app_msg_item_list']:
+                        content_url = re.sub("&amp;", "&", i['content_url'])
+                        content_urls.append(content_url)
+
+                    content_url = re.sub("&amp;", "&", item['app_msg_ext_info']['content_url'])
+                    content_urls.append(content_url)
+                except:
+                    continue
+        else:
+            print "Can't get list url"
+
+        return content_urls
+
+
+    def get_wechat_content(self, html):
+        """
+        解析微信公众号文章内容
+
+        :param html: String html
+
+        :return: Json
+        """
+        result = {}
+        soup = BeautifulSoup(html, 'lxml')
+        result['title'] = soup.select('h2.rich_media_title')[0].get_text().strip()
+        result['brief'] = soup.select('div#js_content')[0].get_text().strip()[:100]
+        result['content'] = soup.select('div#js_content')[0].prettify().strip()
+        result['pub_dtime'] = soup.select('em#post-date')[0].get_text().strip()
+        result['sname'] = soup.select('a#post-user')[0].get_text().strip()
+        return result
+
+    def decode_html_entity(self, html, decodedEncoding=""):
+        """
+        将实体转码为html标签
+
+        :param html:
+
+        :param decodedEncoding:
+
+        :return:
+        """
+        decodedEntityName = re.sub('&(?P<entityName>[a-zA-Z]{2,10});',
+                                   lambda matched: unichr(htmlentitydefs.name2codepoint[matched.group("entityName")]),
+                                   html)
+        decodedCodepointInt = re.sub('&#(?P<codePointInt>\d{2,5});',
+                                     lambda matched: unichr(int(matched.group("codePointInt"))), decodedEntityName)
+        decodedCodepointHex = re.sub('&#x(?P<codePointHex>[a-fA-F\d]{2,5});',
+                                     lambda matched: unichr(int(matched.group("codePointHex"), 16)),
+                                     decodedCodepointInt)
+
+        decodedHtml = decodedCodepointHex
+
+        if (decodedEncoding):
+            decodedHtml = decodedHtml.encode(decodedEncoding, 'ignore')
+
+        return decodedHtml
+
+    def filter_general_html_tag(self, html):
+        """
+        过滤通用html标签 script，a
+
+        :param html: String html
+
+        :return: String
+        """
+        html = re.sub('<script.*?</script>', '', html, flags=re.S)
+        html = re.sub('<a.*?</a>', '', html, flags=re.S)
+        return html
+
+    def filter_chinese(self, content):
+        """
+        提取中文
+
+        :param content: String 文本
+
+        :return: String
+        """
+        result = re.findall(u'[\u4e00-\u9fa5]+', content, flags=re.S)
+        if result:
+            text = ''
+            for i in result:
+                text += i
+            return text
+
+    def is_validate_date(date, validate=False, days=2):
+        """
+        时间周期验证，超过2天为 False
+
+        :param date: String 文章发布时间
+
+        :param validate: Boolean 是否开启时间验证 False 为关闭, True 为开启
+
+        :param days: Int 天数
+
+        :return: Boolean True/False
+        """
+        pub_time = time.mktime(time.strptime(date, '%Y-%m-%d'))
+        if not validate:
+            return True
+        cur_time = time.time()
+        if cur_time - pub_time > 86400 * days:
+            return False
+        else:
+            return True
+
+    def get_wechat_url(self, biz, uin, key):
+        """
+        获取微信公众号列表请求地址
+
+        :param biz: String 微信公众号加密码
+
+        :param uin: String 用户id加密码
+
+        :param key: String 权限加密码
+
+        :return:
+        """
+        return "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={biz}&scene=123&uin={uin}&key={key}".format(biz=biz, uin=uin, key=key)
+
 
 if __name__ == "__main__":
     bc = BaseCrawler()
