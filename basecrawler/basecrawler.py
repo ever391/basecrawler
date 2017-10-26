@@ -360,7 +360,7 @@ class BaseCrawler(object):
             content = re.sub(rule, '', content, flags=re.S)
         return content
 
-    def re_parser(self, rule, content):
+    def re_include(self, rule, content):
         """
         正则匹配内容
 
@@ -397,23 +397,20 @@ class BaseCrawler(object):
             tmp_url = url.format(page=num)
             yield self.requests_get(tmp_url, charset=chaset, timeout=timeout, proxy=proxy)
 
-    def get_picture(self, base_url, content, bucket=None):
+    def get_image_urls(self, base_url, content):
         """
-        下载图片
+        得到图片地址
 
         :param base_url: String 文章URL
 
         :param content: String HTML
 
-        :param bucket: Obj 阿里云 服务使用
+        :return: img_urls List [图片地址列表]
 
-        :return: String HTML
-
-        pics List [主图片列表]
         """
         # data-original 图片处理
         SP_URLS_DATA_ORIGINAL = ['sfw.cn', 'ithome.com', 'bzw315.com', 'sootoo.com', 'newmotor.com.cn', 'meihua.info',
-                                 'zhulong.com', 'ixiqi.com']
+                                 'zhulong.com', 'ixiqi.com', 'iyunying.org']
         # original 图片处理
         SP_URLS_ORIGINAL = ['chrm.cn']
         # file 图片处理
@@ -425,56 +422,38 @@ class BaseCrawler(object):
 
 
         content = re.sub('<IMG', '<img', content)
-        try:
-            pics = []
-            img_data_original = [sp_url for sp_url in SP_URLS_DATA_ORIGINAL if sp_url in base_url]
-            img_original = [sp_url for sp_url in SP_URLS_ORIGINAL if sp_url in base_url]
-            img_file = [sp_url for sp_url in SP_URLS_FILE if sp_url in base_url]
-            img_src_and_data_src = [sp_url for sp_url in SP_URLS_SRC_AND_DATA_SRC if sp_url in base_url]
-            img_data_src = [sp_url for sp_url in SP_URLS_DATA_SRC if sp_url in base_url]
-            if bool(img_data_original):
-                urls = re.findall('<img.*?data-original="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
-            elif bool(img_original):
-                urls = re.findall('<img.*?original="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
-            elif bool(img_file):
-                urls = re.findall('<img.*? file="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
-            elif bool(img_src_and_data_src):
-                urls = re.findall('<img.*? src="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
-                urls = re.findall('<img.*? data-src="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
-            elif bool(img_data_src):
-                urls = re.findall('<img.*? data-src="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
-            else:
-                urls = re.findall('<img.*? src="(.*?)"', content, re.M)
-                content, pics = self.download_img(urls, base_url, content, pics, bucket=bucket)
+        img_data_original = [sp_url for sp_url in SP_URLS_DATA_ORIGINAL if sp_url in base_url]
+        img_original = [sp_url for sp_url in SP_URLS_ORIGINAL if sp_url in base_url]
+        img_file = [sp_url for sp_url in SP_URLS_FILE if sp_url in base_url]
+        img_src_and_data_src = [sp_url for sp_url in SP_URLS_SRC_AND_DATA_SRC if sp_url in base_url]
+        img_data_src = [sp_url for sp_url in SP_URLS_DATA_SRC if sp_url in base_url]
+        if bool(img_data_original):
+            img_urls = re.findall('<img.*?data-original="(.*?)"', content, re.M)
+        elif bool(img_original):
+            img_urls = re.findall('<img.*?original="(.*?)"', content, re.M)
+        elif bool(img_file):
+            img_urls = re.findall('<img.*? file="(.*?)"', content, re.M)
+        elif bool(img_src_and_data_src):
+            img_urls = re.findall('<img.*? src="(.*?)"', content, re.M)
+            img_urls.extend(re.findall('<img.*? data-src="(.*?)"', content, re.M))
+        elif bool(img_data_src):
+            img_urls = re.findall('<img.*? data-src="(.*?)"', content, re.M)
+        else:
+            img_urls = re.findall('<img.*? src="(.*?)"', content, re.M)
 
-            return content, pics
-        except Exception as e:
-            logging.error(base_url + ':::' + str(e), exc_info=True)
-            return content, pics
+        return img_urls
 
-    def download_img(self, img_urls, base_url, html, pics, bucket=None, img_base_name=''):
+
+    def download_images(self, img_urls, base_url):
         """
         图片下载
         :param img_urls: List 提取图片链接地址
 
         :param base_url: String 文章URL
 
-        :param html: String HTML
+        :return: String 图片源地址
 
-        :param bucket: Obj 阿里云oss服务使用
-
-        :param pics: List 空列表
-
-        :param img_base_name: String 图片名前缀
-        :return: String 替换图片地址后的HTML
-
-            List 符合格式大小的图片列表地址
+            String 图片内容流
         """
         for url in img_urls:
             url = url.strip()
@@ -493,25 +472,7 @@ class BaseCrawler(object):
             except:
                 continue
 
-            img_flag = self.is_img_uniform_size(pict_content)
-
-            try:
-                name = self.get_img_name(pict_content)
-            except Exception as e:
-                continue
-
-            img_addr = ''.join(img_base_name + name)
-            if bucket:
-                try:
-                    bucket.put_object(img_addr, pict_content)
-                except Exception as e:
-                    logging.error(str(e))
-                    continue
-
-            html = self.replace_img_addr_in_html(url, img_addr, html)
-            if img_flag:
-                pics.append(img_addr)
-        return html, pics
+            yield url, pict_content
 
     def get_img_name(self, img_content):
         """
@@ -550,7 +511,7 @@ class BaseCrawler(object):
         try:
             img = Image.open(io.BytesIO(img_content))
         except:
-            print 'Image.open io.BytesIO failed'
+            print('Image.open io.BytesIO failed')
             return
         img_h, img_w = img.size
         img_flag = True
@@ -566,7 +527,10 @@ class BaseCrawler(object):
 
         :return: String 图片格式
         """
-        return imghdr.what('test', img_content)
+        img_type = imghdr.what('test', img_content)
+        if not img_type:
+            img_type = 'jpeg'
+        return img_type
 
     def get_img_replace_pattern_rule(self, url):
         """
@@ -653,7 +617,7 @@ class BaseCrawler(object):
                 except:
                     continue
         else:
-            print "Can't get list url"
+            print("Can't get list url")
 
         return content_urls
 
@@ -701,19 +665,25 @@ class BaseCrawler(object):
 
         return decodedHtml
 
-    def filter_general_html_tag(self, html):
+    def filter_general_html_tag(self, html, tag_all=False):
         """
         过滤通用html标签 script，a
 
         :param html: String html
 
+        :param tag_all: Boolean True/False
+
         :return: String
         """
-        html = re.sub('<script.*?</script>', '', html, flags=re.S)
-        html = re.sub('<a.*?</a>', '', html, flags=re.S)
+        if not tag_all:
+            html = re.sub('<script.*?</script>', '', html, flags=re.S)
+            html = re.sub('<a.*?</a>', '', html, flags=re.S)
+        else:
+            html = re.sub('<.*?>', '', html, flags=re.S)
+
         return html
 
-    def filter_chinese(self, content):
+    def get_chinese_word(self, content):
         """
         提取中文
 
@@ -728,7 +698,7 @@ class BaseCrawler(object):
                 text += i
             return text
 
-    def is_validate_date(date, validate=False, days=2):
+    def is_validate_date(self, date, validate=False, days=2):
         """
         时间周期验证，超过2天为 False
 
@@ -740,7 +710,7 @@ class BaseCrawler(object):
 
         :return: Boolean True/False
         """
-        pub_time = time.mktime(time.strptime(date, '%Y-%m-%d'))
+        pub_time = time.mktime(time.strptime(date, u'%Y-%m-%d'))
         if not validate:
             return True
         cur_time = time.time()
@@ -763,8 +733,21 @@ class BaseCrawler(object):
         """
         return "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={biz}&scene=123&uin={uin}&key={key}".format(biz=biz, uin=uin, key=key)
 
+    def replace_iframe_video_src(self, html):
+        """
+        处理iframe视频为data-src的源问题
+
+        :param html: String HTML
+
+        :return: String
+        """
+        video_urls = re.findall('<iframe.*?class="video_iframe".*?data-src="(.*?)".*?>', html)
+        for url in video_urls:
+            match_url = re.sub('\?', '\?', url)
+            replace_str = 'src="%s"' % url
+            html = re.sub(r'data-src="%s"' % match_url, replace_str, html, flags=re.S)
+        return html
 
 if __name__ == "__main__":
     bc = BaseCrawler()
-    print len(bc.get_proxy_ips())
-
+    print(bc.datetime_format(u'星期四, 十月 29, 2015'))
