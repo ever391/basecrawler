@@ -1,10 +1,17 @@
 # coding:utf8
 """
-BaseCrawler is The Crawler Framework, Author is Salem.Jin, my nickname is 39
-Github: https://github.com/ever391/base-crawler
-Docs: http://www.basecrawler.com
-I first write BaseCrawler of The Crawler Framework, I hope everybody like it.
+BaseCrawler is The Crawler Framework
+@ Author is Salem.Jin, my nickname is 39
+@ GitHub: https://github.com/ever391/base-crawler
+@ Docs: http://www.basecrawler.com
+This is my first write BaseCrawler of The Crawler Framework, I hope everybody like it.
 The BaseCrawler is very flexible, you can use function  do you wanna things in the class
+===========================================================================================
+BaseCrawler 是一个轻量型爬虫框架。
+@ 作者：三九
+@ GitHub: https://github.com/ever391/base-crawler
+@ 文档: http://www.basecrawler.com
+这是我第一次写爬虫框架，希望大家喜欢，你可以使用BaseCrawler类中的方法完成你想要做的事
 """
 
 import io
@@ -385,7 +392,7 @@ class BaseCrawler(object):
     def mul_page_by_get(self, url, start_page, stop_page, step=1, chaset='utf8', timeout=15, proxy=None):
         """
         爬取多页
-        :param url: String 格式化后的ulr "http://www.news.com?page={page}"
+        :param url: String 格式化后的ulr "http://www.news.com?page={num}"
 
         :param start_page: Int 开始页面
 
@@ -394,7 +401,7 @@ class BaseCrawler(object):
         :return: requests.Response对象
         """
         for num in range(start_page, stop_page+1, step):
-            tmp_url = url.format(page=num)
+            tmp_url = url.format(num=num)
             yield self.requests_get(tmp_url, charset=chaset, timeout=timeout, proxy=proxy)
 
     def get_image_urls(self, base_url, content):
