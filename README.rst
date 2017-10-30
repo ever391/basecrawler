@@ -9,6 +9,11 @@ BaseCrawler帮你处理各种类型怪异的url拼接错误问题，以及各种
 API说明文档请访问：http://www.basecrawler.com , 备案未通过中，查阅文档请访问：http://103.237.2.96
 具体使用请查看文档
 
+版本支持
+----------
+    * Python 2.7.x
+    * Python 3.x
+    * 如python3发现bu，请与我联系！
 
 安装说明
 ----------
