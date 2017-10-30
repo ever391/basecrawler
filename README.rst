@@ -13,7 +13,7 @@ API说明文档请访问：http://www.basecrawler.com , 备案未通过中，查
 ----------
     * Python 2.7.x
     * Python 3.x
-    * 如python3发现bu，请与我联系！
+    * 如python3发现Bug，请与我联系！
 
 安装说明
 ----------
