@@ -6,7 +6,7 @@
 
 BaseCrawler是一个轻量级，简单快捷上手操作基础爬虫框架，对于爬虫开发者，有很多实用的功能已经进行了优化与完善。
 BaseCrawler帮你处理各种类型怪异的url拼接错误问题，以及各种不同格式的时间，有很多小功能帮你解决头疼的问题。
-API说明文档请访问：http://www.basecrawler.com
+API说明文档请访问：http://www.basecrawler.com , 备案未通过中，查阅文档请访问：http://103.237.2.96
 具体使用请查看文档
 
 
