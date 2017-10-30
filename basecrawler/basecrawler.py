@@ -21,12 +21,19 @@ import json
 import random
 import logging
 import requests
-import urlparse
+try:
+    import urlparse
+except:
+    import urllib.parse as urlparse
 import imghdr
 import urllib
 import hashlib
 import lxml
-import htmlentitydefs
+try:
+    import htmlentitydefs as entities
+except:
+    from html import entities
+    from html.entities import name2codepoint
 
 
 try:
@@ -144,7 +151,7 @@ class BaseCrawler(object):
         response.encoding = charset
         return response
 
-    def get_phantomjs_browser(self, proxy=None, timeout=15,):
+    def get_phantomjs_browser(self, proxy=None, timeout=15):
         """
         创建一个phantomjs浏览器
 
@@ -250,8 +257,12 @@ class BaseCrawler(object):
         """
         SPECIAL_URLS = ['arinchina.com']
         IMG_SPECIAL_URLS = ['itp8.com', 'guijinshu.com', 'chinarta.com', 'cmmo.cn']
-        protocol, result = urllib.splittype(base_url)
-        base_url, rest = urllib.splithost(result)
+        try:
+            protocol, result = urllib.splittype(base_url)
+            base_url, rest = urllib.splithost(result)
+        except:
+            protocol, result = urlparse.splittype(base_url)
+            base_url, rest = urlparse.splithost(result)
         base_url = protocol + '://' + base_url
         if is_image:
             SPECIAL_URLS = IMG_SPECIAL_URLS
@@ -266,7 +277,7 @@ class BaseCrawler(object):
             url = 'http:' + half_url
         elif half_url.startswith('../'):
             filter_url = re.sub('\.\./', '', half_url)
-            url = urllib.basejoin(base_url, filter_url)
+            url = urlparse.urljoin(base_url, filter_url)
         else:
             url = urlparse.urljoin(base_url, half_url.strip('..'))
         return url
@@ -284,7 +295,10 @@ class BaseCrawler(object):
             time_info = datetime.split(',')
             time_info[2] = time_info[2].split(' ')
             time_info[2] = time_info[2][1]
-            time_info = time_info[2] + unicode(time_info[1])
+            try:
+                time_info = time_info[2] + unicode(time_info[1])
+            except:
+                time_info = time_info[2] + time_info[1]
             months = [u'一月', u'二月', u'三月', u'四月', u'五月', u'六月', u'七月', u'八月', u'九月', u'十月', u'十一月', u'十二月']
             months_num = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
             datetime = dict(zip(months, months_num))
@@ -558,7 +572,7 @@ class BaseCrawler(object):
 
     def get_proxy_ips(self):
         """
-        获取99个ip代理, 不要频烦请求
+        获取100个ip代理, 不要频烦请求
 
         :return: List ip代理列表
         """
@@ -656,14 +670,24 @@ class BaseCrawler(object):
 
         :return:
         """
-        decodedEntityName = re.sub('&(?P<entityName>[a-zA-Z]{2,10});',
-                                   lambda matched: unichr(htmlentitydefs.name2codepoint[matched.group("entityName")]),
+        try:
+            decodedEntityName = re.sub('&(?P<entityName>[a-zA-Z]{2,10});',
+                                   lambda matched: unichr(entities.name2codepoint[matched.group("entityName")]),
                                    html)
-        decodedCodepointInt = re.sub('&#(?P<codePointInt>\d{2,5});',
+            decodedCodepointInt = re.sub('&#(?P<codePointInt>\d{2,5});',
                                      lambda matched: unichr(int(matched.group("codePointInt"))), decodedEntityName)
-        decodedCodepointHex = re.sub('&#x(?P<codePointHex>[a-fA-F\d]{2,5});',
+            decodedCodepointHex = re.sub('&#x(?P<codePointHex>[a-fA-F\d]{2,5});',
                                      lambda matched: unichr(int(matched.group("codePointHex"), 16)),
                                      decodedCodepointInt)
+        except:
+            decodedEntityName = re.sub('&(?P<entityName>[a-zA-Z]{2,10});',
+                                       lambda matched: chr(name2codepoint[matched.group("entityName")]),
+                                       html)
+            decodedCodepointInt = re.sub('&#(?P<codePointInt>\d{2,5});',
+                                         lambda matched: chr(int(matched.group("codePointInt"))), decodedEntityName)
+            decodedCodepointHex = re.sub('&#x(?P<codePointHex>[a-fA-F\d]{2,5});',
+                                         lambda matched: chr(int(matched.group("codePointHex"), 16)),
+                                         decodedCodepointInt)
 
         decodedHtml = decodedCodepointHex
 
@@ -757,4 +781,5 @@ class BaseCrawler(object):
 
 if __name__ == "__main__":
     bc = BaseCrawler()
-    print(bc.datetime_format(u'星期四, 十月 29, 2015'))
+    # print(bc.datetime_format(u'星期四, 十月 29, 2015'))
+    # print(bc.decode_html_entity('&amp;'))
