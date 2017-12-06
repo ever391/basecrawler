@@ -271,13 +271,13 @@ class BaseCrawler(object):
             if special_url in base_url:
                 url_flag = True
 
-        if not url_flag and (not half_url.startswith('/') or half_url.startswith('./')) :
+        if half_url.startswith('../'):
+            filter_url = re.sub('\.\./', '', half_url)
+            url = urlparse.urljoin(base_url, filter_url)
+        elif not url_flag and (not half_url.startswith('/') or half_url.startswith('./')) :
             url = urlparse.urljoin(base_url, half_url)
         elif half_url.startswith('//'):
             url = 'http:' + half_url
-        elif half_url.startswith('../'):
-            filter_url = re.sub('\.\./', '', half_url)
-            url = urlparse.urljoin(base_url, filter_url)
         else:
             url = urlparse.urljoin(base_url, half_url.strip('..'))
         return url
@@ -351,7 +351,7 @@ class BaseCrawler(object):
                 time_format = datetime
 
             year = time.localtime()[0]
-            result = re.search(u'(\d{4})[-,/,年, ]+(\d+)[-,/,月, ]+(\d+)|(\d+)[-,/,月, ]+(\d+)', time_format)
+            result = re.search(u'(\d{4})[-,/,年,\. ]+(\d+)[-,/,月,\. ]+(\d+)|(\d+)[-,/,月,\. ]+(\d+)', time_format)
             if result:
                 result = result.groups()
             if result[0]:
@@ -418,7 +418,7 @@ class BaseCrawler(object):
             tmp_url = url.format(num=num)
             yield self.requests_get(tmp_url, charset=chaset, timeout=timeout, proxy=proxy)
 
-    def get_image_urls(self, base_url, content):
+    def get_image_urls(self, base_url, content, data_original=[], original=[], file=[], src_and_data_src=[], data_src=[]):
         """
         得到图片地址
 
@@ -426,20 +426,45 @@ class BaseCrawler(object):
 
         :param content: String HTML
 
-        :return: img_urls List [图片地址列表]
+        :param data_original: List 图片真真实地址为data_original属性的,域名添加方式['baidu.com', 'qq.com']
 
+        :param original: 图片真真实地址为original属性的,域名添加方式['baidu.com', 'qq.com']
+
+        :param file: 图片真真实地址为file属性的,域名添加方式['baidu.com', 'qq.com']
+
+        :param src_and_data_src: 图片真真实地址为src和data_src属性的,域名添加方式['baidu.com', 'qq.com']
+
+        :param data_src: 图片真真实地址为data_src属性的,域名添加方式['baidu.com', 'qq.com']
+
+        :return: img_urls List [图片地址列表]
         """
         # data-original 图片处理
+        if not isinstance(data_original, list):
+            raise('%s is not list class' % data_original)
+        if not isinstance(original, list):
+            raise('%s is not list class' % original)
+        if not isinstance(file, list):
+            raise('%s is not list class' % file)
+        if not isinstance(src_and_data_src, list):
+            raise('%s is not list class' % src_and_data_src)
+        if not isinstance(data_src, list):
+            raise('%s is not list class' % data_src)
+
         SP_URLS_DATA_ORIGINAL = ['sfw.cn', 'ithome.com', 'bzw315.com', 'sootoo.com', 'newmotor.com.cn', 'meihua.info',
-                                 'zhulong.com', 'ixiqi.com', 'iyunying.org']
+                                 'zhulong.com', 'ixiqi.com', 'iyunying.org', 'dotour.cn']
+        SP_URLS_DATA_ORIGINAL.extend(data_original)
         # original 图片处理
         SP_URLS_ORIGINAL = ['chrm.cn']
+        SP_URLS_ORIGINAL.extend(original)
         # file 图片处理
         SP_URLS_FILE = ['wisenjoy.com', 'useit.com.cn']
+        SP_URLS_FILE.extend(file)
         # src与data-src都存在的处理
         SP_URLS_SRC_AND_DATA_SRC = ['36kr.com']
+        SP_URLS_SRC_AND_DATA_SRC.extend(src_and_data_src)
         # data-src 处理
         SP_URLS_DATA_SRC = ['mp.weixin.qq.com', 'qdaily.com']
+        SP_URLS_DATA_SRC.extend(data_src)
 
 
         content = re.sub('<IMG', '<img', content)
@@ -782,4 +807,7 @@ class BaseCrawler(object):
 if __name__ == "__main__":
     bc = BaseCrawler()
     # print(bc.datetime_format(u'星期四, 十月 29, 2015'))
+    # print(bc.datetime_format(u'2017.10.31 14:28'))
     # print(bc.decode_html_entity('&amp;'))
+    # bc.get_image_urls('http://www.baidu.com/','adsfa')
+    print(bc.get_full_url('http://www.thebigdata.cn/jiejuefangan/', '../JieJueFangAn/35028.html'))
