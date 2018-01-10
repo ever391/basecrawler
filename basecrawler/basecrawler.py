@@ -733,7 +733,8 @@ class BaseCrawler(object):
         """
         if not tag_all:
             html = re.sub('<script.*?</script>', '', html, flags=re.S)
-            html = re.sub('<a.*?</a>', '', html, flags=re.S)
+            html = re.sub('<a.*?>', '', html, flags=re.S)
+            html = re.sub('</a>', '', html, flags=re.S)
         else:
             html = re.sub('<.*?>', '', html, flags=re.S)
 
