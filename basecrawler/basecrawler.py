@@ -245,7 +245,7 @@ class BaseCrawler(object):
             time.sleep(interval)
         return browser
 
-    def get_full_url(self, base_url, half_url, is_image=False):
+    def get_full_url(self, source_url, half_url, is_image=False, special_urls=[], img_special_urls=[]):
         """
         获取完整url地址
 
@@ -253,15 +253,21 @@ class BaseCrawler(object):
 
         :param half_url: String 提取后的非完整url地址
 
+        :param is_image: Bool 是否是图片地址
+
+        :param special_urls: List 特殊网页拼接地址
+
+        :param img_special_urls: List 特殊图片拼接地址
+
         :return: String 完整的url地址
         """
-        SPECIAL_URLS = ['arinchina.com']
-        IMG_SPECIAL_URLS = ['itp8.com', 'guijinshu.com', 'chinarta.com', 'cmmo.cn']
+        SPECIAL_URLS = special_urls
+        IMG_SPECIAL_URLS = img_special_urls
         try:
-            protocol, result = urllib.splittype(base_url)
+            protocol, result = urllib.splittype(source_url)
             base_url, rest = urllib.splithost(result)
         except:
-            protocol, result = urlparse.splittype(base_url)
+            protocol, result = urlparse.splittype(source_url)
             base_url, rest = urlparse.splithost(result)
         base_url = protocol + '://' + base_url
         if is_image:
@@ -275,7 +281,7 @@ class BaseCrawler(object):
             filter_url = re.sub('\.\./', '', half_url)
             url = urlparse.urljoin(base_url, filter_url)
         elif not url_flag and (not half_url.startswith('/') or half_url.startswith('./')) :
-            url = urlparse.urljoin(base_url, half_url)
+            url = urlparse.urljoin(source_url, half_url)
         elif half_url.startswith('//'):
             url = 'http:' + half_url
         else:
@@ -811,4 +817,4 @@ if __name__ == "__main__":
     # print(bc.datetime_format(u'2017.10.31 14:28'))
     # print(bc.decode_html_entity('&amp;'))
     # bc.get_image_urls('http://www.baidu.com/','adsfa')
-    print(bc.get_full_url('http://www.thebigdata.cn/jiejuefangan/', '../JieJueFangAn/35028.html'))
+    print(bc.get_full_url('http://www.financialnews.com.cn/jigou/xfjr/', './201801/t20180113_131417.html', special_urls=[]))
