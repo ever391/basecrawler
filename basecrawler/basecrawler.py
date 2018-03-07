@@ -424,7 +424,7 @@ class BaseCrawler(object):
             tmp_url = url.format(num=num)
             yield self.requests_get(tmp_url, charset=chaset, timeout=timeout, proxy=proxy)
 
-    def get_image_urls(self, base_url, content, data_original=[], original=[], file=[], src_and_data_src=[], data_src=[]):
+    def get_image_urls(self, base_url, content, data_original=[], original=[], file=[], src_and_data_src=[], data_src=[], srcset=[]):
         """
         得到图片地址
 
@@ -442,6 +442,8 @@ class BaseCrawler(object):
 
         :param data_src: 图片真真实地址为data_src属性的,域名添加方式['baidu.com', 'qq.com']
 
+        :param srcset: 图片真真实地址为srcset属性的,域名添加方式['baidu.com', 'qq.com']
+
         :return: img_urls List [图片地址列表]
         """
         # data-original 图片处理
@@ -455,6 +457,8 @@ class BaseCrawler(object):
             raise('%s is not list class' % src_and_data_src)
         if not isinstance(data_src, list):
             raise('%s is not list class' % data_src)
+        if not isinstance(srcset, list):
+            raise('%s is not list class' % srcset)
 
         SP_URLS_DATA_ORIGINAL = ['sfw.cn', 'ithome.com', 'bzw315.com', 'sootoo.com', 'newmotor.com.cn', 'meihua.info',
                                  'zhulong.com', 'ixiqi.com', 'iyunying.org', 'dotour.cn']
@@ -471,6 +475,9 @@ class BaseCrawler(object):
         # data-src 处理
         SP_URLS_DATA_SRC = ['mp.weixin.qq.com', 'qdaily.com']
         SP_URLS_DATA_SRC.extend(data_src)
+        # srcset 处理
+        SP_URLS_SRCSET = ['199it.com']
+        SP_URLS_SRCSET.extend(srcset)
 
 
         content = re.sub('<IMG', '<img', content)
@@ -479,6 +486,7 @@ class BaseCrawler(object):
         img_file = [sp_url for sp_url in SP_URLS_FILE if sp_url in base_url]
         img_src_and_data_src = [sp_url for sp_url in SP_URLS_SRC_AND_DATA_SRC if sp_url in base_url]
         img_data_src = [sp_url for sp_url in SP_URLS_DATA_SRC if sp_url in base_url]
+        img_srcset = [sp_url for sp_url in SP_URLS_SRCSET if sp_url in base_url]
         if bool(img_data_original):
             img_urls = re.findall('<img.*?data-original="(.*?)"', content, re.M)
         elif bool(img_original):
@@ -490,6 +498,10 @@ class BaseCrawler(object):
             img_urls.extend(re.findall('<img.*? data-src="(.*?)"', content, re.M))
         elif bool(img_data_src):
             img_urls = re.findall('<img.*? data-src="(.*?)"', content, re.M)
+        elif bool(img_srcset):
+            # img_urls = re.findall('<img.*? srcset="(.*?)"', content, re.M) # 199it 无法正则中文问题取消此种方式
+            img_urls = re.findall('<a href="(.*?.png)"', content, re.M) # 199it 无法正则中文问题取消此种方式
+            # img_urls = map(lambda u: u.split(',')[0].split()[0], img_urls)
         else:
             img_urls = re.findall('<img.*? src="(.*?)"', content, re.M)
 
@@ -549,6 +561,7 @@ class BaseCrawler(object):
         """
 
         pat = self.get_img_replace_pattern_rule(url)
+        print pat
         html = re.sub(pat, '<img src="{}"/>'.format(img_addr), html)
         return html
 
@@ -592,6 +605,9 @@ class BaseCrawler(object):
 
         :return: String 正则匹配规则
         """
+        if u'199it.com' in url:
+            pat = u'<a href="{}".*?</a>'.format(url)
+            return pat
         if u'(' in url:
             url = re.sub('\(', '\(', url)
         if u')' in url:
@@ -817,4 +833,5 @@ if __name__ == "__main__":
     # print(bc.datetime_format(u'2017.10.31 14:28'))
     # print(bc.decode_html_entity('&amp;'))
     # bc.get_image_urls('http://www.baidu.com/','adsfa')
-    print(bc.get_full_url('http://www.financialnews.com.cn/jigou/xfjr/', './201801/t20180113_131417.html', special_urls=[]))
+    # print(bc.get_full_url('http://www.financialnews.com.cn/jigou/xfjr/', './201801/t20180113_131417.html', special_urls=[]))
+
