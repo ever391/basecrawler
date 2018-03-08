@@ -499,9 +499,9 @@ class BaseCrawler(object):
         elif bool(img_data_src):
             img_urls = re.findall('<img.*? data-src="(.*?)"', content, re.M)
         elif bool(img_srcset):
-            # img_urls = re.findall('<img.*? srcset="(.*?)"', content, re.M) # 199it 无法正则中文问题取消此种方式
-            img_urls = re.findall('<a href="(.*?.png)"', content, re.M) # 199it 无法正则中文问题取消此种方式
-            # img_urls = map(lambda u: u.split(',')[0].split()[0], img_urls)
+            img_urls = re.findall('<img.*? srcset="(.*?)"', content, re.M) # 199it 无法正则中文问题取消此种方式
+            # img_urls = re.findall('<a href="(.*?.png)"', content, re.M) # 199it 这种方式不严谨有关联问题
+            img_urls = map(lambda u: u.split(',')[0].split()[0], img_urls)
         else:
             img_urls = re.findall('<img.*? src="(.*?)"', content, re.M)
 
@@ -561,7 +561,9 @@ class BaseCrawler(object):
         """
 
         pat = self.get_img_replace_pattern_rule(url)
-        print pat
+        if '199it.com' in url:
+            html = re.sub(pat, '<IMG src="%s"/>' % img_addr, html)
+            return html
         html = re.sub(pat, '<img src="{}"/>'.format(img_addr), html)
         return html
 
@@ -605,8 +607,8 @@ class BaseCrawler(object):
 
         :return: String 正则匹配规则
         """
-        if u'199it.com' in url:
-            pat = u'<a href="{}".*?</a>'.format(url)
+        if '199it.com' in url:
+            pat = '<img .*?"{}".*?>'.format(url)
             return pat
         if u'(' in url:
             url = re.sub('\(', '\(', url)
@@ -829,9 +831,4 @@ class BaseCrawler(object):
 
 if __name__ == "__main__":
     bc = BaseCrawler()
-    # print(bc.datetime_format(u'星期四, 十月 29, 2015'))
-    # print(bc.datetime_format(u'2017.10.31 14:28'))
-    # print(bc.decode_html_entity('&amp;'))
-    # bc.get_image_urls('http://www.baidu.com/','adsfa')
-    # print(bc.get_full_url('http://www.financialnews.com.cn/jigou/xfjr/', './201801/t20180113_131417.html', special_urls=[]))
 
