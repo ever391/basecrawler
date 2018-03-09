@@ -608,7 +608,7 @@ class BaseCrawler(object):
         :return: String 正则匹配规则
         """
         if '199it.com' in url:
-            pat = u'<img .*?"{}".*?>'.format(url)
+            pat = u'<img .*?"{}.*?>'.format(url)
             return pat
         if u'(' in url:
             url = re.sub('\(', '\(', url)
