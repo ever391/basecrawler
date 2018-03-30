@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>BaseCrawler类 &mdash; basecrawler 0.1.2 documentation</title>
+  <title>BaseCrawler类 &mdash; basecrawler 0.1.13 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="basecrawler 0.1.2 documentation" href="index.html"/>
+    <link rel="top" title="basecrawler 0.1.13 documentation" href="index.html"/>
         <link rel="prev" title="安装说明" href="installtion.html"/> 
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                0.1.2
+                0.1.13
               </div>
             
           
@@ -365,7 +365,7 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_full_url">
-<code class="descname">get_full_url</code><span class="sig-paren">(</span><em>base_url</em>, <em>half_url</em>, <em>is_image=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_full_url" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_full_url</code><span class="sig-paren">(</span><em>source_url</em>, <em>half_url</em>, <em>is_image=False</em>, <em>special_urls=[]</em>, <em>img_special_urls=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_full_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>获取完整url地址</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -374,6 +374,9 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>base_url</strong> -- String 源地址</li>
 <li><strong>half_url</strong> -- String 提取后的非完整url地址</li>
+<li><strong>is_image</strong> -- Bool 是否是图片地址</li>
+<li><strong>special_urls</strong> -- List 特殊网页拼接地址</li>
+<li><strong>img_special_urls</strong> -- List 特殊图片拼接地址</li>
 </ul>
 </td>
 </tr>
@@ -402,7 +405,7 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_image_urls">
-<code class="descname">get_image_urls</code><span class="sig-paren">(</span><em>base_url</em>, <em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_image_urls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_image_urls</code><span class="sig-paren">(</span><em>base_url</em>, <em>content</em>, <em>data_original=[]</em>, <em>original=[]</em>, <em>file=[]</em>, <em>src_and_data_src=[]</em>, <em>data_src=[]</em>, <em>srcset=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_image_urls" title="Permalink to this definition">¶</a></dt>
 <dd><p>得到图片地址</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -411,6 +414,12 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>base_url</strong> -- String 文章URL</li>
 <li><strong>content</strong> -- String HTML</li>
+<li><strong>data_original</strong> -- List 图片真真实地址为data_original属性的,域名添加方式['baidu.com', 'qq.com']</li>
+<li><strong>original</strong> -- 图片真真实地址为original属性的,域名添加方式['baidu.com', 'qq.com']</li>
+<li><strong>file</strong> -- 图片真真实地址为file属性的,域名添加方式['baidu.com', 'qq.com']</li>
+<li><strong>src_and_data_src</strong> -- 图片真真实地址为src和data_src属性的,域名添加方式['baidu.com', 'qq.com']</li>
+<li><strong>data_src</strong> -- 图片真真实地址为data_src属性的,域名添加方式['baidu.com', 'qq.com']</li>
+<li><strong>srcset</strong> -- 图片真真实地址为srcset属性的,域名添加方式['baidu.com', 'qq.com']</li>
 </ul>
 </td>
 </tr>
@@ -815,7 +824,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.1.2',
+            VERSION:'0.1.13',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
