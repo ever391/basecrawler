@@ -24,7 +24,7 @@ PIP 安装
 
     通过basecrawler请求目标url ::
 
-        response = basecrawler.static_downloader_get(url)
+        response = basecrawler.requests_get(url)
 
     ``response`` 是requests.Response对象，输出返回的结果内容 ::
 
@@ -46,5 +46,5 @@ PIP 安装
     if __name__ == "__main__":
         crawler = Crawler()
         url = http://www.baidu.com
-        crawler.static_downloader_get(url)
+        crawler.requests_get(url)
 
