@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>BaseCrawler类 &mdash; basecrawler 0.1.13 documentation</title>
+  <title>BaseCrawler类 &mdash; basecrawler 0.1.13 文档</title>
   
 
   
@@ -32,10 +32,10 @@
   
 
   
-        <link rel="index" title="Index"
+        <link rel="index" title="索引"
               href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="basecrawler 0.1.13 documentation" href="index.html"/>
+        <link rel="search" title="搜索" href="search.html"/>
+    <link rel="top" title="basecrawler 0.1.13 文档" href="index.html"/>
         <link rel="prev" title="安装说明" href="installtion.html"/> 
 
   
@@ -160,29 +160,29 @@
            <div itemprop="articleBody">
             
   <div class="section" id="basecrawler">
-<h1>BaseCrawler类<a class="headerlink" href="#basecrawler" title="Permalink to this headline">¶</a></h1>
+<h1>BaseCrawler类<a class="headerlink" href="#basecrawler" title="永久链接至标题">¶</a></h1>
 <div class="section" id="basecrawler-api">
-<h2>BaseCrawler API<a class="headerlink" href="#basecrawler-api" title="Permalink to this headline">¶</a></h2>
+<h2>BaseCrawler API<a class="headerlink" href="#basecrawler-api" title="永久链接至标题">¶</a></h2>
 <dl class="class">
 <dt id="basecrawler.basecrawler.BaseCrawler">
-<em class="property">class </em><code class="descclassname">basecrawler.basecrawler.</code><code class="descname">BaseCrawler</code><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">basecrawler.basecrawler.</code><code class="descname">BaseCrawler</code><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler" title="永久链接至目标">¶</a></dt>
 <dd><p>基础爬虫类,实现多种解析方法及实用功能</p>
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.css_parser_urls">
-<code class="descname">css_parser_urls</code><span class="sig-paren">(</span><em>soup</em>, <em>css_rule</em>, <em>limit=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.css_parser_urls" title="Permalink to this definition">¶</a></dt>
-<dd><p>基于CSS选择器解析</p>
+<code class="descname">css_parser_urls</code><span class="sig-paren">(</span><em>soup</em>, <em>css_rule</em>, <em>limit=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.css_parser_urls" title="永久链接至目标">¶</a></dt>
+<dd><p>基于CSS选择器解析提取url</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>soup</strong> -- Obj BeautifulSoup对象</li>
 <li><strong>css_rule</strong> -- String css提取规则</li>
 <li><strong>limit</strong> -- Int 限制</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">List [url1,url2,url3]</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">List [url1,url2,url3]</p>
 </td>
 </tr>
 </tbody>
@@ -191,15 +191,15 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.datetime_format">
-<code class="descname">datetime_format</code><span class="sig-paren">(</span><em>datetime</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.datetime_format" title="Permalink to this definition">¶</a></dt>
+<code class="descname">datetime_format</code><span class="sig-paren">(</span><em>datetime</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.datetime_format" title="永久链接至目标">¶</a></dt>
 <dd><p>时间格式化, 非标准时间：&quot;1天前，2天前……大于2天未进行格式化&quot;</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>datetime</strong> -- String 任何格式的时间</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>datetime</strong> -- String 任何格式的时间</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String example: 2017-10-6</td>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">String example: 2017-10-6</td>
 </tr>
 </tbody>
 </table>
@@ -207,19 +207,19 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.decode_html_entity">
-<code class="descname">decode_html_entity</code><span class="sig-paren">(</span><em>html</em>, <em>decodedEncoding=''</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.decode_html_entity" title="Permalink to this definition">¶</a></dt>
+<code class="descname">decode_html_entity</code><span class="sig-paren">(</span><em>html</em>, <em>decodedEncoding=''</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.decode_html_entity" title="永久链接至目标">¶</a></dt>
 <dd><p>将实体转码为html标签</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>html</strong> -- </li>
 <li><strong>decodedEncoding</strong> -- </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last"></p>
 </td>
 </tr>
 </tbody>
@@ -228,16 +228,16 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.download_images">
-<code class="descname">download_images</code><span class="sig-paren">(</span><em>img_urls</em>, <em>base_url</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.download_images" title="Permalink to this definition">¶</a></dt>
+<code class="descname">download_images</code><span class="sig-paren">(</span><em>img_urls</em>, <em>base_url</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.download_images" title="永久链接至目标">¶</a></dt>
 <dd><p>图片下载
 :param img_urls: List 提取图片链接地址</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>base_url</strong> -- String 文章URL</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>base_url</strong> -- String 文章URL</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String 图片源地址<p>String 图片内容流</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">String 图片源地址<p>String 图片内容流</p>
 </td>
 </tr>
 </tbody>
@@ -246,13 +246,13 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.exec_lazy_loads">
-<code class="descname">exec_lazy_loads</code><span class="sig-paren">(</span><em>browser</em>, <em>start=1000</em>, <em>stop=10000</em>, <em>step=1000</em>, <em>interval=0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.exec_lazy_loads" title="Permalink to this definition">¶</a></dt>
-<dd><p>Phantomjs浏览器惰性加载</p>
+<code class="descname">exec_lazy_loads</code><span class="sig-paren">(</span><em>browser</em>, <em>start=1000</em>, <em>stop=10000</em>, <em>step=1000</em>, <em>interval=0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.exec_lazy_loads" title="永久链接至目标">¶</a></dt>
+<dd><p>处理Phantomjs浏览器惰性加载</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>browser</strong> -- Obj Phantomjs浏览器对象</li>
 <li><strong>start</strong> -- Int 开始页</li>
 <li><strong>stop</strong> -- Int 停止页</li>
@@ -261,7 +261,7 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Obj 完成惰性加载后的Phantomjs浏览器对象</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">Obj 完成惰性加载后的Phantomjs浏览器对象</p>
 </td>
 </tr>
 </tbody>
@@ -270,19 +270,19 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.filter_general_html_tag">
-<code class="descname">filter_general_html_tag</code><span class="sig-paren">(</span><em>html</em>, <em>tag_all=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.filter_general_html_tag" title="Permalink to this definition">¶</a></dt>
+<code class="descname">filter_general_html_tag</code><span class="sig-paren">(</span><em>html</em>, <em>tag_all=False</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.filter_general_html_tag" title="永久链接至目标">¶</a></dt>
 <dd><p>过滤通用html标签 script，a</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>html</strong> -- String html</li>
 <li><strong>tag_all</strong> -- Boolean True/False</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">String</p>
 </td>
 </tr>
 </tbody>
@@ -291,15 +291,15 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.format_proxy_by_requests">
-<code class="descname">format_proxy_by_requests</code><span class="sig-paren">(</span><em>ip</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.format_proxy_by_requests" title="Permalink to this definition">¶</a></dt>
+<code class="descname">format_proxy_by_requests</code><span class="sig-paren">(</span><em>ip</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.format_proxy_by_requests" title="永久链接至目标">¶</a></dt>
 <dd><p>格式化为requests代理格式</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ip</strong> -- String &quot;127.0.0.1:1234&quot;</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>ip</strong> -- String &quot;127.0.0.1:1234&quot;</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dict {&quot;http&quot;:&quot;<a class="reference external" href="http://127.0.0.1:1234">http://127.0.0.1:1234</a>&quot;,&quot;https&quot;:&quot;<a class="reference external" href="https://127.0.0.1:1234">https://127.0.0.1:1234</a>&quot;}</td>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">Dict {&quot;http&quot;:&quot;<a class="reference external" href="http://127.0.0.1:1234">http://127.0.0.1:1234</a>&quot;,&quot;https&quot;:&quot;<a class="reference external" href="https://127.0.0.1:1234">https://127.0.0.1:1234</a>&quot;}</td>
 </tr>
 </tbody>
 </table>
@@ -307,15 +307,15 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_chinese_word">
-<code class="descname">get_chinese_word</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_chinese_word" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_chinese_word</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_chinese_word" title="永久链接至目标">¶</a></dt>
 <dd><p>提取中文</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>content</strong> -- String 文本</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>content</strong> -- String 文本</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String</td>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">String</td>
 </tr>
 </tbody>
 </table>
@@ -323,19 +323,19 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_content">
-<code class="descname">get_content</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_content" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_content</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_content" title="永久链接至目标">¶</a></dt>
 <dd><p>抽像方法：解析内容页结果</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>args</strong> -- </li>
 <li><strong>kwargs</strong> -- </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Json {&quot;title&quot;:String,&quot;content&quot;:String,……}</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">Json {&quot;title&quot;:String,&quot;content&quot;:String,……}</p>
 </td>
 </tr>
 </tbody>
@@ -344,19 +344,19 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_content_urls">
-<code class="descname">get_content_urls</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_content_urls" title="Permalink to this definition">¶</a></dt>
-<dd><p>抽像方法：获取内容页url列表</p>
+<code class="descname">get_content_urls</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_content_urls" title="永久链接至目标">¶</a></dt>
+<dd><p>抽像方法：获取列表页url列表</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>args</strong> -- </li>
 <li><strong>kwargs</strong> -- </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">List [url1,url2,url3]</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">List [url1,url2,url3]</p>
 </td>
 </tr>
 </tbody>
@@ -365,13 +365,13 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_full_url">
-<code class="descname">get_full_url</code><span class="sig-paren">(</span><em>source_url</em>, <em>half_url</em>, <em>is_image=False</em>, <em>special_urls=[]</em>, <em>img_special_urls=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_full_url" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_full_url</code><span class="sig-paren">(</span><em>source_url</em>, <em>half_url</em>, <em>is_image=False</em>, <em>special_urls=[]</em>, <em>img_special_urls=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_full_url" title="永久链接至目标">¶</a></dt>
 <dd><p>获取完整url地址</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>base_url</strong> -- String 源地址</li>
 <li><strong>half_url</strong> -- String 提取后的非完整url地址</li>
 <li><strong>is_image</strong> -- Bool 是否是图片地址</li>
@@ -380,7 +380,7 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String 完整的url地址</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">String 完整的url地址</p>
 </td>
 </tr>
 </tbody>
@@ -389,15 +389,15 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_image_format">
-<code class="descname">get_image_format</code><span class="sig-paren">(</span><em>img_content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_image_format" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_image_format</code><span class="sig-paren">(</span><em>img_content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_image_format" title="永久链接至目标">¶</a></dt>
 <dd><p>获取图片格式</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img_content</strong> -- img_content: Stream2bin 2进制流文件</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>img_content</strong> -- img_content: Stream2bin 2进制流文件</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String 图片格式</td>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">String 图片格式</td>
 </tr>
 </tbody>
 </table>
@@ -405,13 +405,13 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_image_urls">
-<code class="descname">get_image_urls</code><span class="sig-paren">(</span><em>base_url</em>, <em>content</em>, <em>data_original=[]</em>, <em>original=[]</em>, <em>file=[]</em>, <em>src_and_data_src=[]</em>, <em>data_src=[]</em>, <em>srcset=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_image_urls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_image_urls</code><span class="sig-paren">(</span><em>base_url</em>, <em>content</em>, <em>data_original=[]</em>, <em>original=[]</em>, <em>file=[]</em>, <em>src_and_data_src=[]</em>, <em>data_src=[]</em>, <em>srcset=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_image_urls" title="永久链接至目标">¶</a></dt>
 <dd><p>得到图片地址</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>base_url</strong> -- String 文章URL</li>
 <li><strong>content</strong> -- String HTML</li>
 <li><strong>data_original</strong> -- List 图片真真实地址为data_original属性的,域名添加方式['baidu.com', 'qq.com']</li>
@@ -423,7 +423,7 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">img_urls List [图片地址列表]</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">img_urls List [图片地址列表]</p>
 </td>
 </tr>
 </tbody>
@@ -432,23 +432,31 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_img_name">
-<code class="descname">get_img_name</code><span class="sig-paren">(</span><em>img_content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_img_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>得到图片唯一名称
-:param img_content: Byte 图片流格式
-:return:</p>
+<code class="descname">get_img_name</code><span class="sig-paren">(</span><em>img_content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_img_name" title="永久链接至目标">¶</a></dt>
+<dd><p>得到图片唯一名称</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>img_content</strong> -- Byte 图片流格式</td>
+</tr>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">name String</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_img_replace_pattern_rule">
-<code class="descname">get_img_replace_pattern_rule</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_img_replace_pattern_rule" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_img_replace_pattern_rule</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_img_replace_pattern_rule" title="永久链接至目标">¶</a></dt>
 <dd><p>图片地址预处理</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>url</strong> -- String url</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>url</strong> -- String url</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String 正则匹配规则</td>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">String 正则匹配规则</td>
 </tr>
 </tbody>
 </table>
@@ -456,19 +464,19 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_phantomjs_browser">
-<code class="descname">get_phantomjs_browser</code><span class="sig-paren">(</span><em>proxy=None</em>, <em>timeout=15</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_phantomjs_browser" title="Permalink to this definition">¶</a></dt>
-<dd><p>创建一个phantomjs浏览器</p>
+<code class="descname">get_phantomjs_browser</code><span class="sig-paren">(</span><em>proxy=None</em>, <em>timeout=15</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_phantomjs_browser" title="永久链接至目标">¶</a></dt>
+<dd><p>创建一个phantomjs浏览器，用于处理动态加载js数据</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>proxy</strong> -- String &quot;ip:port&quot;</li>
 <li><strong>timeout</strong> -- Int</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Phantomjs.Browser 浏览器对象</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">Phantomjs.Browser 浏览器对象</p>
 </td>
 </tr>
 </tbody>
@@ -477,13 +485,13 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_proxy_ips">
-<code class="descname">get_proxy_ips</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_proxy_ips" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_proxy_ips</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_proxy_ips" title="永久链接至目标">¶</a></dt>
 <dd><p>获取100个ip代理, 不要频烦请求</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List ip代理列表</td>
+<tr class="field-odd field"><th class="field-name">返回:</th><td class="field-body">List ip代理列表</td>
 </tr>
 </tbody>
 </table>
@@ -491,15 +499,15 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_wechat_content">
-<code class="descname">get_wechat_content</code><span class="sig-paren">(</span><em>html</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_wechat_content" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_wechat_content</code><span class="sig-paren">(</span><em>html</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_wechat_content" title="永久链接至目标">¶</a></dt>
 <dd><p>解析微信公众号文章内容</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>html</strong> -- String html</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>html</strong> -- String html</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Json</td>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">Json</td>
 </tr>
 </tbody>
 </table>
@@ -507,15 +515,15 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_wechat_content_urls">
-<code class="descname">get_wechat_content_urls</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_wechat_content_urls" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_wechat_content_urls</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_wechat_content_urls" title="永久链接至目标">¶</a></dt>
 <dd><p>得到公众号内容url列表</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>content</strong> -- String</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>content</strong> -- String</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List</td>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">List</td>
 </tr>
 </tbody>
 </table>
@@ -523,20 +531,20 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.get_wechat_url">
-<code class="descname">get_wechat_url</code><span class="sig-paren">(</span><em>biz</em>, <em>uin</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_wechat_url" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_wechat_url</code><span class="sig-paren">(</span><em>biz</em>, <em>uin</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.get_wechat_url" title="永久链接至目标">¶</a></dt>
 <dd><p>获取微信公众号列表请求地址</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>biz</strong> -- String 微信公众号加密码</li>
 <li><strong>uin</strong> -- String 用户id加密码</li>
 <li><strong>key</strong> -- String 权限加密码</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last"></p>
 </td>
 </tr>
 </tbody>
@@ -545,15 +553,15 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.is_img_uniform_size">
-<code class="descname">is_img_uniform_size</code><span class="sig-paren">(</span><em>img_content</em>, <em>heigth=150</em>, <em>width=150</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.is_img_uniform_size" title="Permalink to this definition">¶</a></dt>
+<code class="descname">is_img_uniform_size</code><span class="sig-paren">(</span><em>img_content</em>, <em>heigth=150</em>, <em>width=150</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.is_img_uniform_size" title="永久链接至目标">¶</a></dt>
 <dd><p>判断图片格式大小是否符合要求</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img_content</strong> -- Stream2bin 2进制流文件</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>img_content</strong> -- Stream2bin 2进制流文件</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Boole True/False</td>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">Boole True/False</td>
 </tr>
 </tbody>
 </table>
@@ -561,20 +569,20 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.is_validate_date">
-<code class="descname">is_validate_date</code><span class="sig-paren">(</span><em>date</em>, <em>validate=False</em>, <em>days=2</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.is_validate_date" title="Permalink to this definition">¶</a></dt>
+<code class="descname">is_validate_date</code><span class="sig-paren">(</span><em>date</em>, <em>validate=False</em>, <em>days=2</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.is_validate_date" title="永久链接至目标">¶</a></dt>
 <dd><p>时间周期验证，超过2天为 False</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>date</strong> -- String 文章发布时间</li>
 <li><strong>validate</strong> -- Boolean 是否开启时间验证 False 为关闭, True 为开启</li>
 <li><strong>days</strong> -- Int 天数</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Boolean True/False</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">Boolean True/False</p>
 </td>
 </tr>
 </tbody>
@@ -583,19 +591,19 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.login_account">
-<code class="descname">login_account</code><span class="sig-paren">(</span><em>url</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.login_account" title="Permalink to this definition">¶</a></dt>
+<code class="descname">login_account</code><span class="sig-paren">(</span><em>url</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.login_account" title="永久链接至目标">¶</a></dt>
 <dd><p>网站登录操作</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>url</strong> -- String 登录请求的url地址</li>
 <li><strong>data</strong> -- Dict 登录请求提交的相关数据</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">None</p>
 </td>
 </tr>
 </tbody>
@@ -604,20 +612,20 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.mul_page_by_get">
-<code class="descname">mul_page_by_get</code><span class="sig-paren">(</span><em>url</em>, <em>start_page</em>, <em>stop_page</em>, <em>step=1</em>, <em>chaset='utf8'</em>, <em>timeout=15</em>, <em>proxy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.mul_page_by_get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">mul_page_by_get</code><span class="sig-paren">(</span><em>url</em>, <em>start_page</em>, <em>stop_page</em>, <em>step=1</em>, <em>chaset='utf8'</em>, <em>timeout=15</em>, <em>proxy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.mul_page_by_get" title="永久链接至目标">¶</a></dt>
 <dd><p>爬取多页
 :param url: String 格式化后的ulr &quot;<a class="reference external" href="http://www.news.com">http://www.news.com</a>?page={num}&quot;</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>start_page</strong> -- Int 开始页面</li>
 <li><strong>stop_page</strong> -- Int 结束页面</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">requests.Response对象</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">requests.Response对象</p>
 </td>
 </tr>
 </tbody>
@@ -626,20 +634,20 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.re_exclude">
-<code class="descname">re_exclude</code><span class="sig-paren">(</span><em>rule</em>, <em>content</em>, <em>separator=':::'</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.re_exclude" title="Permalink to this definition">¶</a></dt>
+<code class="descname">re_exclude</code><span class="sig-paren">(</span><em>rule</em>, <em>content</em>, <em>separator=':::'</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.re_exclude" title="永久链接至目标">¶</a></dt>
 <dd><p>正则不包含</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>rule</strong> -- String 正则规则</li>
 <li><strong>content</strong> -- String 被匹配的内容</li>
 <li><strong>separator</strong> -- String 分隔符</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String 被过滤后的内容</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">String 被过滤后的内容</p>
 </td>
 </tr>
 </tbody>
@@ -648,19 +656,19 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.re_include">
-<code class="descname">re_include</code><span class="sig-paren">(</span><em>rule</em>, <em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.re_include" title="Permalink to this definition">¶</a></dt>
+<code class="descname">re_include</code><span class="sig-paren">(</span><em>rule</em>, <em>content</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.re_include" title="永久链接至目标">¶</a></dt>
 <dd><p>正则匹配内容</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>rule</strong> -- String 正则规则</li>
 <li><strong>content</strong> -- String 被匹配的内容</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">String 匹配后的结果</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">String 匹配后的结果</p>
 </td>
 </tr>
 </tbody>
@@ -669,15 +677,15 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.replace_iframe_video_src">
-<code class="descname">replace_iframe_video_src</code><span class="sig-paren">(</span><em>html</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.replace_iframe_video_src" title="Permalink to this definition">¶</a></dt>
+<code class="descname">replace_iframe_video_src</code><span class="sig-paren">(</span><em>html</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.replace_iframe_video_src" title="永久链接至目标">¶</a></dt>
 <dd><p>处理iframe视频为data-src的源问题</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>html</strong> -- String HTML</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>html</strong> -- String HTML</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String</td>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body">String</td>
 </tr>
 </tbody>
 </table>
@@ -685,23 +693,35 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.replace_img_addr_in_html">
-<code class="descname">replace_img_addr_in_html</code><span class="sig-paren">(</span><em>url</em>, <em>img_addr</em>, <em>html</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.replace_img_addr_in_html" title="Permalink to this definition">¶</a></dt>
-<dd><p>替换html中图片地址
-:param url: String 被替换的url
-:param img_addr: String 新的图片地址
-:param html: String 被替换的html
-:return: html String</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="basecrawler.basecrawler.BaseCrawler.requests_get">
-<code class="descname">requests_get</code><span class="sig-paren">(</span><em>url</em>, <em>charset='utf8'</em>, <em>timeout=15</em>, <em>proxy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.requests_get" title="Permalink to this definition">¶</a></dt>
-<dd><p>静态爬取</p>
+<code class="descname">replace_img_addr_in_html</code><span class="sig-paren">(</span><em>url</em>, <em>img_addr</em>, <em>html</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.replace_img_addr_in_html" title="永久链接至目标">¶</a></dt>
+<dd><p>替换html中图片地址</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> -- String 被替换的url</li>
+<li><strong>img_addr</strong> -- String 新的图片地址</li>
+<li><strong>html</strong> -- String 被替换的html</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">html String</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="basecrawler.basecrawler.BaseCrawler.requests_get">
+<code class="descname">requests_get</code><span class="sig-paren">(</span><em>url</em>, <em>charset='utf8'</em>, <em>timeout=15</em>, <em>proxy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.requests_get" title="永久链接至目标">¶</a></dt>
+<dd><p>Get请求</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>url</strong> -- String 目标url</li>
 <li><strong>charset</strong> -- String 解码格式</li>
 <li><strong>timeout</strong> -- int 超时时间</li>
@@ -709,7 +729,7 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">requests.Response对象</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">requests.Response对象</p>
 </td>
 </tr>
 </tbody>
@@ -718,13 +738,13 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.requests_post">
-<code class="descname">requests_post</code><span class="sig-paren">(</span><em>url</em>, <em>data</em>, <em>charset='utf8'</em>, <em>timeout=15</em>, <em>proxy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.requests_post" title="Permalink to this definition">¶</a></dt>
-<dd><p>静态爬取</p>
+<code class="descname">requests_post</code><span class="sig-paren">(</span><em>url</em>, <em>data</em>, <em>charset='utf8'</em>, <em>timeout=15</em>, <em>proxy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.requests_post" title="永久链接至目标">¶</a></dt>
+<dd><p>Post请求</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>url</strong> -- String 目标url</li>
 <li><strong>data</strong> -- Dict 传递的参数</li>
 <li><strong>charset</strong> -- String 解码格式</li>
@@ -733,7 +753,7 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">requests.Response对象</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">requests.Response对象</p>
 </td>
 </tr>
 </tbody>
@@ -742,19 +762,19 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.run">
-<code class="descname">run</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.run" title="Permalink to this definition">¶</a></dt>
+<code class="descname">run</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.run" title="永久链接至目标">¶</a></dt>
 <dd><p>抽像方法：主程序入口</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><ul class="first simple">
 <li><strong>args</strong> -- </li>
 <li><strong>kwargs</strong> -- </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"><p class="first last">None</p>
 </td>
 </tr>
 </tbody>
@@ -763,15 +783,15 @@
 
 <dl class="method">
 <dt id="basecrawler.basecrawler.BaseCrawler.update_headers">
-<code class="descname">update_headers</code><span class="sig-paren">(</span><em>header</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.update_headers" title="Permalink to this definition">¶</a></dt>
+<code class="descname">update_headers</code><span class="sig-paren">(</span><em>header</em><span class="sig-paren">)</span><a class="headerlink" href="#basecrawler.basecrawler.BaseCrawler.update_headers" title="永久链接至目标">¶</a></dt>
 <dd><p>修改请求头信息</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>header</strong> -- Dict 请求头信息</td>
+<tr class="field-odd field"><th class="field-name">参数:</th><td class="field-body"><strong>header</strong> -- Dict 请求头信息</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">返回:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>

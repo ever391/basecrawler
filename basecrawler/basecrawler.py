@@ -1,17 +1,16 @@
 # coding:utf8
 """
-BaseCrawler is The Crawler Framework
-@ Author is Salem.Jin, my nickname is 39
+BaseCrawler is The Crawler Tools Library
+@ Autho: 三九
 @ GitHub: https://github.com/ever391/base-crawler
 @ Docs: http://www.basecrawler.com
-This is my first write BaseCrawler of The Crawler Framework, I hope everybody like it.
+This is my first write BaseCrawler of The Crawler Tools Library, I hope everybody like it.
 The BaseCrawler is very flexible, you can use function  do you wanna things in the class
 ===========================================================================================
-BaseCrawler 是一个轻量型爬虫框架。
+BaseCrawler是一个轻量级灵活的爬虫工具库，为更多爬虫工程师快速灵活的开发自己的爬虫产品！
 @ 作者：三九
 @ GitHub: https://github.com/ever391/base-crawler
 @ 文档: http://www.basecrawler.com
-这是我第一次写爬虫框架，希望大家喜欢，你可以使用BaseCrawler类中的方法完成你想要做的事
 """
 
 import io
@@ -91,7 +90,7 @@ class BaseCrawler(object):
 
     def get_content_urls(self, *args, **kwargs):
         """
-        抽像方法：获取内容页url列表
+        抽像方法：获取列表页url列表
 
         :param args:
 
@@ -115,7 +114,7 @@ class BaseCrawler(object):
 
     def requests_get(self, url, charset='utf8', timeout=15, proxy=None):
         """
-        静态爬取
+        Get请求
 
         :param url: String 目标url
 
@@ -133,7 +132,7 @@ class BaseCrawler(object):
 
     def requests_post(self, url, data, charset='utf8', timeout=15, proxy=None):
         """
-        静态爬取
+        Post请求
 
         :param url: String 目标url
 
@@ -153,7 +152,7 @@ class BaseCrawler(object):
 
     def get_phantomjs_browser(self, proxy=None, timeout=15):
         """
-        创建一个phantomjs浏览器
+        创建一个phantomjs浏览器，用于处理动态加载js数据
 
         :param proxy: String "ip:port"
 
@@ -180,7 +179,7 @@ class BaseCrawler(object):
 
     def css_parser_urls(self, soup, css_rule, limit=None):
         """
-        基于CSS选择器解析
+        基于CSS选择器解析提取url
 
         :param soup: Obj BeautifulSoup对象
 
@@ -223,7 +222,7 @@ class BaseCrawler(object):
 
     def exec_lazy_loads(self, browser, start=1000, stop=10000, step=1000, interval=0.1):
         """
-        Phantomjs浏览器惰性加载
+        处理Phantomjs浏览器惰性加载
 
         :param browser: Obj Phantomjs浏览器对象
 
@@ -541,8 +540,10 @@ class BaseCrawler(object):
     def get_img_name(self, img_content):
         """
         得到图片唯一名称
+
         :param img_content: Byte 图片流格式
-        :return:
+
+        :return: name String
         """
         img_type = self.get_image_format(img_content)
         if img_type == 'jpeg':
@@ -554,9 +555,13 @@ class BaseCrawler(object):
     def replace_img_addr_in_html(self, url, img_addr, html):
         """
         替换html中图片地址
+
         :param url: String 被替换的url
+
         :param img_addr: String 新的图片地址
+
         :param html: String 被替换的html
+
         :return: html String
         """
 
