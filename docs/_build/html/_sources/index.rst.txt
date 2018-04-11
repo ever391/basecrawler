@@ -11,6 +11,7 @@
 BaseCrawler是一个灵活的爬虫工具库，为更多爬虫工程师快速灵活的开发自己的爬虫产品！
 
    支持：Python2
+
    支持：Python3
 
 .. toctree::
