@@ -77,7 +77,7 @@ class BaseCrawler(object):
 
     def run(self, *args, **kwargs):
         """
-        抽像方法：主程序入口
+        抽象方法：主程序入口
 
         :param args:
 
@@ -90,7 +90,7 @@ class BaseCrawler(object):
 
     def get_content_urls(self, *args, **kwargs):
         """
-        抽像方法：获取列表页url列表
+        抽象方法：获取列表页url列表
 
         :param args:
 
@@ -102,7 +102,7 @@ class BaseCrawler(object):
 
     def get_content(self, *args, **kwargs):
         """
-        抽像方法：解析内容页结果
+        抽象方法：解析内容页结果
 
         :param args:
 
@@ -672,7 +672,7 @@ class BaseCrawler(object):
 
         :return: List
         """
-        result = re.search("var msgList = '(.*?)'", content, flags=re.S)
+        result = re.search(r"var msgList = ({.*?}}]});", content, flags=re.S)
         content_urls = []
         if result:
             content = result.group(1)
@@ -685,14 +685,14 @@ class BaseCrawler(object):
                 try:
                     for i in item['app_msg_ext_info']['multi_app_msg_item_list']:
                         content_url = re.sub("&amp;", "&", i['content_url'])
-                        content_urls.append(content_url)
+                        content_urls.append("https://mp.weixin.qq.com" + content_url)
 
                     content_url = re.sub("&amp;", "&", item['app_msg_ext_info']['content_url'])
-                    content_urls.append(content_url)
+                    content_urls.append("https://mp.weixin.qq.com" + content_url)
                 except:
                     continue
         else:
-            print("Can't get list url")
+            print("Can't get list url, please check content!")
 
         return content_urls
 
