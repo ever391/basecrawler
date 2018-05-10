@@ -710,8 +710,8 @@ class BaseCrawler(object):
         result['title'] = soup.select('h2.rich_media_title')[0].get_text().strip()
         result['brief'] = soup.select('div#js_content')[0].get_text().strip()[:100]
         result['content'] = soup.select('div#js_content')[0].prettify().strip()
-        result['pub_dtime'] = soup.select('em#post-date')[0].get_text().strip()
-        result['sname'] = soup.select('a#post-user')[0].get_text().strip()
+        result['pub_dtime'] = soup.select('em#publish_time')[0].get_text().strip()
+        result['sname'] = soup.select('#profileBt a')[0].get_text().strip()
         return result
 
     def decode_html_entity(self, html, decodedEncoding=""):
@@ -836,4 +836,5 @@ class BaseCrawler(object):
 
 if __name__ == "__main__":
     bc = BaseCrawler()
+
 

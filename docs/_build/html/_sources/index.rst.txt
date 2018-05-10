@@ -14,6 +14,11 @@ BaseCrawler是一个灵活的爬虫工具库，为更多爬虫工程师快速灵
 
    支持：Python3
 
+我会长期维护滴！
+
+2018-5-10 同步更亲微信采集策略！请使用最新版本！
+
+
 .. toctree::
    :maxdepth: 2
    :caption: basecrawler
