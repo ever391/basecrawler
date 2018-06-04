@@ -28,6 +28,7 @@ import imghdr
 import urllib
 import hashlib
 import lxml
+import jieba
 try:
     import htmlentitydefs as entities
 except:
@@ -39,6 +40,7 @@ try:
     from Pillow import Image
 except:
     from PIL import Image
+from collections import Counter
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from lxml import etree
@@ -315,7 +317,7 @@ class BaseCrawler(object):
                     break
         else:
             unstandard_time = False
-            keyword_times = [u'天前', u'昨天', u'前天', u'月前', u'年前']
+            keyword_times = [u'今天', u'天前', u'昨天', u'前天', u'月前', u'年前']
             for keyword in keyword_times:
                 if keyword in datetime:
                     unstandard_time = True
@@ -323,10 +325,11 @@ class BaseCrawler(object):
 
             if unstandard_time:
                 time_info = False
-                if ('1' in datetime and u'天前' in datetime) or u'昨天' in datetime:
+                if u'今天' in datetime:
+                    time_info = time.time()
+                elif ('1' in datetime and u'天前' in datetime) or u'昨天' in datetime:
                     time_info = time.time() - 86400
-
-                if ('2' in datetime and u'天前' in datetime) or u'前天' in datetime:
+                elif ('2' in datetime and u'天前' in datetime) or u'前天' in datetime:
                     time_info = time.time() - 86400 * 2
 
                 for day in range(3, 32):
@@ -639,7 +642,7 @@ class BaseCrawler(object):
             port = tr_node.xpath('td[3]/text()')[0]
             ip_and_port = ip + ':' + port
             ips.add(ip_and_port)
-        return ips
+        return list(ips)
 
     def login_account(self, url, data):
         """
@@ -710,7 +713,7 @@ class BaseCrawler(object):
         result['title'] = soup.select('h2.rich_media_title')[0].get_text().strip()
         result['brief'] = soup.select('div#js_content')[0].get_text().strip()[:100]
         result['content'] = soup.select('div#js_content')[0].prettify().strip()
-        result['pub_dtime'] = soup.select('em#publish_time')[0].get_text().strip()
+        result['pub_dtime'] = self.datetime_format(soup.select('em#publish_time')[0].get_text().strip())
         result['sname'] = soup.select('#profileBt a')[0].get_text().strip()
         return result
 
@@ -815,7 +818,7 @@ class BaseCrawler(object):
 
         :param key: String 权限加密码
 
-        :return:
+        :return: String
         """
         return "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz={biz}&scene=123&uin={uin}&key={key}".format(biz=biz, uin=uin, key=key)
 
@@ -834,7 +837,17 @@ class BaseCrawler(object):
             html = re.sub(r'data-src="%s"' % match_url, replace_str, html, flags=re.S)
         return html
 
+    def counter_words(self, text):
+        """
+        计算文本词频
+
+        :param text: 待计算的文本内容
+
+        :return: Dict {词：数量}
+        """
+        words = list(jieba.cut(text))
+        return dict(Counter(words))
+
 if __name__ == "__main__":
     bc = BaseCrawler()
-
 

@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 PACKAGE = "basecrawler"
 NAME = "basecrawler"
-DESCRIPTION = "this is THe Crawler Frame"
+DESCRIPTION = "This is THe Crawler Libray"
 AUTHOR = "ever391"
 AUTHOR_EMAIL = "smart.jin@foxmail.com"
 URL = "https://github.com/ever391/base-crawler"
@@ -16,6 +16,7 @@ requires = [
     'selenium',
     'Pillow',
     'lxml',
+    'jieba'
 ]
 
 setup(
