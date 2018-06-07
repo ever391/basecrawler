@@ -9,7 +9,7 @@ import pymongo
 class LianJia(BaseCrawler):
 
     def __init__(self):
-        self.mysqldb = pymysql.connect("127.0.0.1", "root", "123", "xiaoqu")
+        self.mysqldb = pymysql.connect("127.0.0.1", "root", "", "xiaoqu")
         self.cursor = self.mysqldb.cursor()
         self.mysqldb.charset = "utf8"
         self.cursor.execute("set names utf8")
