@@ -15,11 +15,11 @@ class LianJia(BaseCrawler):
         self.mysqldb = pymysql.connect("127.0.0.1", "root", "", "xiaoqu")
         self.cursor = self.mysqldb.cursor()
         self.mysqldb.charset = "utf8"
-        self.cursor.execute("set names utf8")
+        self.cursor.execute("set names utf8mb4")
 
-        self.cursor.execute('set names utf8')
+        self.cursor.execute('set names utf8mb4')
         self.cursor.execute('SET CHARACTER SET utf8mb4;')
-        self.cursor.execute('SET character_set_connection=utf8;')
+        self.cursor.execute('SET character_set_connection=utf8mb4;')
 
         self.mongo = pymongo.MongoClient(['127.0.0.1:27017'], maxPoolSize=10)
         self.mongodb = self.mongo["wechat"]
