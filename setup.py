@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 PACKAGE = "basecrawler"
 NAME = "basecrawler"
-DESCRIPTION = "This is THe Crawler Libray"
+DESCRIPTION = "This is the crawler libray"
 AUTHOR = "ever391"
 AUTHOR_EMAIL = "smart.jin@foxmail.com"
 URL = "https://github.com/ever391/base-crawler"
