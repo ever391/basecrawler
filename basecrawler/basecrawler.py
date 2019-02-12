@@ -9,7 +9,7 @@ The BaseCrawler is very flexible, you can use function  do you wanna things in t
 ===========================================================================================
 BaseCrawler是一个轻量级灵活的爬虫工具库，为更多爬虫工程师快速灵活的开发自己的爬虫产品！
 @ 作者：三九
-@ GitHub: https://github.com/ever391/base-crawler
+@ GitHub: https://github.com/ever391/basecrawler
 @ 文档: http://www.basecrawler.com
 """
 
@@ -27,8 +27,12 @@ except:
 import imghdr
 import urllib
 import hashlib
-import lxml
 import jieba
+import lxml.etree as etree
+from collections import Counter
+from selenium import webdriver
+from bs4 import BeautifulSoup
+from selenium.webdriver.common.proxy import Proxy, ProxyType
 try:
     import htmlentitydefs as entities
 except:
@@ -40,16 +44,11 @@ try:
     from Pillow import Image
 except:
     from PIL import Image
-from collections import Counter
-from selenium import webdriver
-from bs4 import BeautifulSoup
-from lxml import etree
-from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 
 
 USER_AGENTS = [
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
     ]
 
 
@@ -128,7 +127,7 @@ class BaseCrawler(object):
 
         :return: requests.Response对象
         """
-        response = self.request.get(url, proxies=proxy, timeout=timeout)
+        response = self.request.get(url, headers=HEADER, proxies=proxy, timeout=timeout)
         response.encoding = charset
         return response
 
@@ -550,10 +549,33 @@ class BaseCrawler(object):
         """
         img_type = self.get_image_format(img_content)
         if img_type == 'jpeg':
-            name = ''.join(hashlib.sha1(img_content).hexdigest() + '.jpg')
+            name = ''.join(hashlib.sha1(img_content+str(time.time())).hexdigest() + '.jpg')
         else:
-            name = ''.join(hashlib.sha1(img_content).hexdigest() + '.' + img_type)
+            name = ''.join(hashlib.sha1(img_content+str(time.time())).hexdigest() + '.' + img_type)
         return name
+
+    def get_img_info(self, img_content):
+        data = {}
+        data["md5"] = hashlib.md5(img_content).hexdigest()
+        data["sha1"] = hashlib.sha1(img_content).hexdigest()
+        data["img_type"] = self.get_image_format(img_content)
+        try:
+            img = Image.open(io.BytesIO(img_content))
+            img_h, img_w = img.size
+        except:
+            print('Image.open io.BytesIO failed')
+            img_h, img_w = 0, 0
+        data["height"] = img_h
+        data["width"] = img_w
+        data["usage_counter"] = 1
+
+        data["thumb"] = ""
+        data["size"] = 0
+        data["state"] = 0
+        data["time_length"] = 0
+        data["type"] = 1
+        return data
+
 
     def replace_img_addr_in_html(self, url, img_addr, html):
         """
@@ -617,6 +639,9 @@ class BaseCrawler(object):
         """
         if '199it.com' in url:
             pat = u'<img .*?"{}.*?>'.format(url)
+            return pat
+        if 'pstatp.com' in url:  # 头条图片
+            pat = u"""<img src="{}" .*?>""".format(url)
             return pat
         if u'(' in url:
             url = re.sub('\(', '\(', url)
@@ -710,11 +735,30 @@ class BaseCrawler(object):
         """
         result = {}
         soup = BeautifulSoup(html, 'lxml')
-        result['title'] = soup.select('h2.rich_media_title')[0].get_text().strip()
-        result['brief'] = soup.select('div#js_content')[0].get_text().strip()[:100]
-        result['content'] = soup.select('div#js_content')[0].prettify().strip()
-        result['pub_dtime'] = self.datetime_format(soup.select('em#publish_time')[0].get_text().strip())
-        result['sname'] = soup.select('#profileBt a')[0].get_text().strip()
+        try:
+            result['title'] = soup.select('h2.rich_media_title')[0].get_text().strip()
+        except Exception as e:
+            self.logger.error(str(e))
+            return
+        try:
+            result['brief'] = soup.select('div#js_content')[0].get_text().strip()[:100]
+        except Exception as e:
+            self.logger.error(str(e))
+        try:
+            result['content'] = soup.select('div#js_content')[0].prettify().strip()
+        except Exception as e:
+            self.logger.error(str(e))
+            return
+        try:
+            res = re.search("var publish_time.*?;", html, re.S)
+            result['pub_dtime'] = self.datetime_format(res.group())
+        except Exception as e:
+            self.logger.error(str(e))
+            result['pub_dtime'] = self.datetime_format(u"今天")
+        try:
+            result['sname'] = soup.select('#profileBt a')[0].get_text().strip()
+        except Exception as e:
+            self.logger.error(str(e))
         return result
 
     def decode_html_entity(self, html, decodedEncoding=""):
@@ -780,7 +824,8 @@ class BaseCrawler(object):
 
         :return: String
         """
-        result = re.findall(u'[\u4e00-\u9fa5]+', content, flags=re.S)
+
+        result = re.findall(u'[\u4e00-\u9fa5\w]', content, flags=re.S)
         if result:
             text = ''
             for i in result:
@@ -845,9 +890,32 @@ class BaseCrawler(object):
 
         :return: Dict {词：数量}
         """
-        words = list(jieba.cut(text))
-        return dict(Counter(words))
+        return dict(Counter(list(jieba.cut(text))))
+
+    def get_words_str(self, article, source_worlds):
+        result = []
+        if not source_worlds:
+            return ""
+        words = dict(Counter(list(jieba.cut(article))))
+        # 循环标签字典
+        for k, v in source_worlds.iteritems():
+            result.append(k+"["+ str(words.get(k, 0)) + "]")
+        return ",".join(result)
+
+    def unix_to_date(self, unix):
+        return time.strftime("%Y-%m-%d", time.localtime(unix))
+
+    def remove_html_style(self, html):
+        # 废弃，不能使用
+        # doc = pq(html)
+        # tags = ["p", "body", "div", "span", "h1", "h2", "h3", "h4", "h5", "h6", "table", "tbody", "tr", "td", "ul", "ol", "li", "dl", "dd", "dt", "img", "strong"]
+        # for tag in tags:
+        #     html = doc(tag).attr("style", "")
+        # return html.__unicode__()
+        html = re.sub(' style=(".*?")', "", html, flags=re.M)
+        html = re.sub(" style=('.*?')", "", html, flags=re.M)
+        return html
 
 if __name__ == "__main__":
     bc = BaseCrawler()
-
+    print bc.get_chinese_word(u"《西游记》看着english不错，特_别是第1版.")
