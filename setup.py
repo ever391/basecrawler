@@ -7,7 +7,7 @@ NAME = "basecrawler"
 DESCRIPTION = "This is the crawler libray"
 AUTHOR = "ever391"
 AUTHOR_EMAIL = "smart.jin@foxmail.com"
-URL = "https://github.com/ever391/base-crawler"
+URL = "https://github.com/ever391/basecrawler"
 VERSION = __import__(PACKAGE).__version__
 
 requires = [
@@ -23,15 +23,15 @@ setup(
     name=NAME,
     version=VERSION,
     description=DESCRIPTION,
-    long_description=open("README.rst").read(),
+    long_description_content_type="text/markdown",
+    long_description=open("./README.rst").read(),
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
     license="MIT",
     url=URL,
     packages=find_packages(),
-    #package_dir={'basecrawler': 'basecrawler'},
     package_data={
-        '': ['*.txt', '*.rst'],
+        '': ['*.rst','*.txt', "md"],
         'test': ['*.msg'],
         },
     include_package_data=True,

@@ -29,7 +29,7 @@ QQ交流群:662500882
 
     首先我们引入BaseCrawler ::
 
-        from basecrawler.basecrawler import BaseCrawler
+        from basecrawler import BaseCrawler
 
     声明一个url地址， 例如: ::
 
@@ -52,7 +52,7 @@ QQ交流群:662500882
 
 如果我们采用面创建类的方式实现，可以直接继承 ``BaseCrawler`` ::
 
-    from basecrawler.basecrawler import BaseCrawler
+    from basecrawler import BaseCrawler
 
     class Crawler(BaseCrawler):
 
@@ -106,17 +106,6 @@ QQ交流群:662500882
 
     * HTML中存在iframe视频，不能正常播放的，已经完成处理。
 
-支持解析微信公众号文章列表
------------------------
-
-    * 解析公众号文章列表已经完成，只要你能拿到请求结果！（方法我就不公开了）
-
-支持解析微信公众号文章内容
------------------------
-
-    * 如果在爬微信公众号的文章，输入文章页面地址，自动把解析结果给你，不要再做重复工作了！
-
-长期维护，同步更新
----------------------
-
- - 2018-5-10 更新微信文章页面数据采集规则
+取消支持微信
+-------------
+    * 取消微信支持
