@@ -820,6 +820,9 @@ class BaseCrawler(object):
         html = re.sub(" style=('.*?')", "", html, flags=re.M)
         return html
 
+    def hash_md5(self, content):
+        return hashlib.md5(content.encode("utf8")).hexdigest()
+
 if __name__ == "__main__":
     bc = BaseCrawler()
 
