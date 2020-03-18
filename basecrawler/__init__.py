@@ -1,5 +1,5 @@
 # coding:utf8
-__version__ = "0.1.17"
+__version__ = "0.1.18"
 
 """
 BaseCrawler is The Crawler Tools Library
@@ -427,7 +427,7 @@ class BaseCrawler(object):
             tmp_url = url.format(num=num)
             yield self.requests_get(tmp_url, charset=chaset, timeout=timeout, proxy=proxy)
 
-    def get_image_urls(self, base_url, content, data_original=[], original=[], file=[], src_and_data_src=[], data_src=[], srcset=[]):
+    def get_image_urls(self, base_url, content, data_original=[], original=[], file=[], src_and_data_src=[], data_src=[], srcset=[], data_original_src=[]):
         """
         得到图片地址
 
@@ -447,6 +447,8 @@ class BaseCrawler(object):
 
         :param srcset: 图片真真实地址为srcset属性的,域名添加方式['baidu.com', 'qq.com']
 
+        :param data_original_src: List 图片真真实地址为data_original_src属性的,域名添加方式['baidu.com', 'qq.com']
+
         :return: img_urls List [图片地址列表]
         """
         # data-original 图片处理
@@ -462,6 +464,8 @@ class BaseCrawler(object):
             raise('%s is not list class' % data_src)
         if not isinstance(srcset, list):
             raise('%s is not list class' % srcset)
+        if not isinstance(data_original_src, list):
+            raise('%s is not list class' % data_original_src)
 
         SP_URLS_DATA_ORIGINAL = []
         SP_URLS_DATA_ORIGINAL.extend(data_original)
@@ -480,6 +484,9 @@ class BaseCrawler(object):
         # srcset 处理
         SP_URLS_SRCSET = ['199it.com']
         SP_URLS_SRCSET.extend(srcset)
+        # data-original-src
+        SP_URLS_DATA_ORIGINAL_SRC = ["jianshu.io", "jianshu.com"]
+        SP_URLS_DATA_ORIGINAL_SRC.extend(data_original_src)
 
 
         content = re.sub('<IMG', '<img', content)
@@ -489,8 +496,12 @@ class BaseCrawler(object):
         img_src_and_data_src = [sp_url for sp_url in SP_URLS_SRC_AND_DATA_SRC if sp_url in base_url]
         img_data_src = [sp_url for sp_url in SP_URLS_DATA_SRC if sp_url in base_url]
         img_srcset = [sp_url for sp_url in SP_URLS_SRCSET if sp_url in base_url]
+        img_data_original_src = [sp_url for sp_url in SP_URLS_DATA_ORIGINAL_SRC if sp_url in base_url]
+
         if bool(img_data_original):
             img_urls = re.findall('<img.*?data-original="(.*?)"', content, re.M)
+        elif bool(img_data_original_src):
+            img_urls = re.findall('<img.*?data-original-src="(.*?)"', content, re.M)
         elif bool(img_original):
             img_urls = re.findall('<img.*?original="(.*?)"', content, re.M)
         elif bool(img_file):
@@ -739,7 +750,7 @@ class BaseCrawler(object):
         :return: String
         """
 
-        result = re.findall(u'[\u4e00-\u9fa5\w]', content, flags=re.S)
+        result = re.findall(u'[\u4e00-\u9fa5\w]+', content, flags=re.S)
         if result:
             text = ''
             for i in result:
@@ -792,16 +803,6 @@ class BaseCrawler(object):
         """
         return dict(Counter(list(jieba.cut(text))))
 
-    def get_words_str(self, article, source_worlds):
-        result = []
-        if not source_worlds:
-            return ""
-        words = dict(Counter(list(jieba.cut(article))))
-        # 循环标签字典
-        for k, v in source_worlds.iteritems():
-            result.append(k+"["+ str(words.get(k, 0)) + "]")
-        return ",".join(result)
-
     def unix_to_date(self, unix):
         '''
         时间戳转日期字符串
@@ -809,6 +810,14 @@ class BaseCrawler(object):
         :return:
         '''
         return time.strftime("%Y-%m-%d", time.localtime(unix))
+
+    def unix_to_datetime(self, unix):
+        '''
+        时间戳转日期时间字符串
+        :param unix: 1753543210
+        :return:
+        '''
+        return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(unix))
 
     def remove_html_style(self, html):
         '''
@@ -821,8 +830,12 @@ class BaseCrawler(object):
         return html
 
     def hash_md5(self, content):
+        '''
+        MD5 加密文本
+        :param content:
+        :return:
+        '''
         return hashlib.md5(content.encode("utf8")).hexdigest()
 
 if __name__ == "__main__":
     bc = BaseCrawler()
-
