@@ -1,5 +1,5 @@
 # coding:utf8
-__version__ = "0.1.18"
+__version__ = "0.1.19"
 
 """
 BaseCrawler is The Crawler Tools Library
@@ -470,7 +470,7 @@ class BaseCrawler(object):
         SP_URLS_DATA_ORIGINAL = []
         SP_URLS_DATA_ORIGINAL.extend(data_original)
         # original 图片处理
-        SP_URLS_ORIGINAL = ['chrm.cn']
+        SP_URLS_ORIGINAL = []
         SP_URLS_ORIGINAL.extend(original)
         # file 图片处理
         SP_URLS_FILE = []
@@ -482,10 +482,10 @@ class BaseCrawler(object):
         SP_URLS_DATA_SRC = []
         SP_URLS_DATA_SRC.extend(data_src)
         # srcset 处理
-        SP_URLS_SRCSET = ['199it.com']
+        SP_URLS_SRCSET = []
         SP_URLS_SRCSET.extend(srcset)
         # data-original-src
-        SP_URLS_DATA_ORIGINAL_SRC = ["jianshu.io", "jianshu.com"]
+        SP_URLS_DATA_ORIGINAL_SRC = []
         SP_URLS_DATA_ORIGINAL_SRC.extend(data_original_src)
 
 
@@ -579,7 +579,7 @@ class BaseCrawler(object):
         :return: html String
         """
 
-        pat = self.get_img_replace_pattern_rule(url)
+        pat = self.get_img_replace_pattern_rule(url, {})
         if img_upper:
             html = re.sub(pat, '<IMG src="%s"/>' % img_addr, html)
             return html
