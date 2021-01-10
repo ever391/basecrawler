@@ -618,7 +618,7 @@ class BaseCrawler(object):
             img_type = 'jpeg'
         return img_type
 
-    def get_img_replace_pattern_rule(self, url, custom_rule=dict):
+    def get_img_replace_pattern_rule(self, url, custom_rule):
         """
         图片地址预处理
 
